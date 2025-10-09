@@ -26,7 +26,7 @@ public class StrategyRule {
     /** 抽奖规则类型【rule_lock】 */
     private String ruleModel;
     /** 抽奖规则比值 */
-    private Integer ruleValue;
+    private String ruleValue;
     /** 抽奖规则描述 */
     private String ruleDesc;
     /** 创建时间 */

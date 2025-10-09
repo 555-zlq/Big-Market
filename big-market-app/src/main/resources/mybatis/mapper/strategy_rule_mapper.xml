@@ -21,4 +21,10 @@
         limit 10
     </select>
 
+    <select id="queryStrategyRule" resultMap="dataMap" resultType="com.learn.infrastructure.persistent.po.StrategyRule">
+        select strategy_rule.strategy_id, strategy_rule.award_id, strategy_rule.rule_type, strategy_rule.rule_model, strategy_rule.rule_value, strategy_rule.rule_desc
+        from strategy_rule
+        where strategy_id = #{strategyId} and rule_model = #{ruleModel}
+    </select>
+
 </mapper>

@@ -2,6 +2,8 @@ package com.learn.domain.strategy.repository;
 
 
 import com.learn.domain.strategy.model.entity.StrategyAwardEntity;
+import com.learn.domain.strategy.model.entity.StrategyEntity;
+import com.learn.domain.strategy.model.entity.StrategyRuleEntity;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -25,12 +27,12 @@ public interface IStrategyRepository {
 
     /**
      *
-     * @param strategyId
+     * @param key
      * @param rateRange
      * @param shuffleStrategyAwardSearchRateTable
      * @description 将打乱后的概率-奖品表存储到redis中
      */
-    void storeStrategyAwardSearchRateTables(Long strategyId, Integer rateRange, HashMap<Integer, Integer> shuffleStrategyAwardSearchRateTable);
+    void storeStrategyAwardSearchRateTables(String key, Integer rateRange, HashMap<Integer, Integer> shuffleStrategyAwardSearchRateTable);
 
     /**
      * 获取策略所对应的一系列概率值
@@ -39,11 +41,17 @@ public interface IStrategyRepository {
      */
     int getRateRange(Long strategyId);
 
+    int getRateRange(String key);
+
     /**
-     * 根据随机生成的值获取策略实体
      *
-     * @param strategyId
+     * @param key
      * @param i
+     * @return
      */
-    Integer getStrategyAwardAssemble(Long strategyId, int i);
+    Integer getStrategyAwardAssemble(String key, int i);
+
+    StrategyEntity queryStrategyEntityByStrategyId(Long strategyId);
+
+    StrategyRuleEntity queryStrategyRuleEntity(Long strategyId, String ruleModel);
 }
