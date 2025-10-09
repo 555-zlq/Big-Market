@@ -55,7 +55,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public void storeStrategyAwardSearchRateTables(Long strategyId, Integer rateRange, HashMap<Integer, Integer> shuffleStrategyAwardSearchRateTable) {
-        redisService.setValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY + strategyId, rateRange.intValue());
+        redisService.setValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY + strategyId, rateRange);
 
         Map<Integer, Integer> cacheRateMap = redisService.getMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + strategyId);
         cacheRateMap.putAll(shuffleStrategyAwardSearchRateTable);

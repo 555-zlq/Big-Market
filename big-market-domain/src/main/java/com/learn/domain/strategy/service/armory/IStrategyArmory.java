@@ -10,9 +10,9 @@ package com.learn.domain.strategy.service.armory;
 public interface IStrategyArmory {
 
     /***
+     * 根据策略id直接进行装配
      *
      * @param strategyId
-     * @description 根据策略id直接进行装配
      */
     void assembleLotteryStrategy(Long strategyId);
 

@@ -173,6 +173,14 @@ public interface IRedisService {
      */
     String getFromMap(String key, String field);
 
+    /**
+     * 获取哈希表中指定字段的值，字段为map
+     *
+     * @param key
+     * @param field
+     * @return 值
+     *
+     */
     <K, V> V getFromMap(String key, K field);
 
     /**
