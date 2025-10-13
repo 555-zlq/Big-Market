@@ -1,6 +1,7 @@
 package com.learn.infrastructure.persistent.dao;
 
 
+import com.learn.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.learn.infrastructure.persistent.po.Award;
 import com.learn.infrastructure.persistent.po.StrategyAward;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,4 +20,6 @@ public interface IStrategyAwardDao {
     List<StrategyAward> queryStrategyAwardList();
 
     List<StrategyAward> queryStrategyAwardListByStrategyId(Long strategyId);
+
+    String queryStrategyAwardRuleModels(StrategyAward strategyAward);
 }

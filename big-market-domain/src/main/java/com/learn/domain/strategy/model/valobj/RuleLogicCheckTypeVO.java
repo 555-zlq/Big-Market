@@ -1,4 +1,4 @@
-package com.learn.domain.strategy.model.vo;
+package com.learn.domain.strategy.model.valobj;
 
 
 import lombok.AllArgsConstructor;

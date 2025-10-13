@@ -3,7 +3,7 @@ package com.learn.domain.strategy.service.rule.impl;
 
 import com.learn.domain.strategy.model.entity.RuleActionEntity;
 import com.learn.domain.strategy.model.entity.RuleMatterEntity;
-import com.learn.domain.strategy.model.vo.RuleLogicCheckTypeVO;
+import com.learn.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.learn.domain.strategy.repository.IStrategyRepository;
 import com.learn.domain.strategy.service.annotation.LogicStrategy;
 import com.learn.domain.strategy.service.rule.ILogicFilter;

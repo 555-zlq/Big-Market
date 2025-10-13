@@ -20,4 +20,5 @@ public class RaffleFactoryEntity {
 
     private String userId;
     private Long strategyId;
+    private Long awardId;
 }

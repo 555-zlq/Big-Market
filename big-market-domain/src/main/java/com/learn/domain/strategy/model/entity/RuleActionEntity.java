@@ -1,7 +1,7 @@
 package com.learn.domain.strategy.model.entity;
 
 
-import com.learn.domain.strategy.model.vo.RuleLogicCheckTypeVO;
+import com.learn.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import lombok.*;
 
 /**

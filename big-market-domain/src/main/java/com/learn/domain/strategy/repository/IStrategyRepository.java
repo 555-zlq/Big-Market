@@ -4,6 +4,7 @@ package com.learn.domain.strategy.repository;
 import com.learn.domain.strategy.model.entity.StrategyAwardEntity;
 import com.learn.domain.strategy.model.entity.StrategyEntity;
 import com.learn.domain.strategy.model.entity.StrategyRuleEntity;
+import com.learn.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -56,4 +57,6 @@ public interface IStrategyRepository {
     StrategyRuleEntity queryStrategyRuleEntity(Long strategyId, String ruleModel);
 
     String queryStrategyRuleValue(Long strategyId, Long awardId, String ruleModel);
+
+    StrategyAwardRuleModelVO queryStrategyAwardRuleModels(Long strategyId, Integer awardId);
 }
