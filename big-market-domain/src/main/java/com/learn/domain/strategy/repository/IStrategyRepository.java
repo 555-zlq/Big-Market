@@ -54,4 +54,6 @@ public interface IStrategyRepository {
     StrategyEntity queryStrategyEntityByStrategyId(Long strategyId);
 
     StrategyRuleEntity queryStrategyRuleEntity(Long strategyId, String ruleModel);
+
+    String queryStrategyRuleValue(Long strategyId, Long awardId, String ruleModel);
 }
