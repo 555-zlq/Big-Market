@@ -1,4 +1,4 @@
-package com.learn.domain.strategy.service.rule;
+package com.learn.domain.strategy.service.rule.filter;
 
 
 import com.learn.domain.strategy.model.entity.RuleActionEntity;

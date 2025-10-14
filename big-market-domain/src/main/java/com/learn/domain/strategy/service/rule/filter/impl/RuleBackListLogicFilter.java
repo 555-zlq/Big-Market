@@ -1,4 +1,4 @@
-package com.learn.domain.strategy.service.rule.impl;
+package com.learn.domain.strategy.service.rule.filter.impl;
 
 
 import com.learn.domain.strategy.model.entity.RuleActionEntity;
@@ -6,8 +6,8 @@ import com.learn.domain.strategy.model.entity.RuleMatterEntity;
 import com.learn.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.learn.domain.strategy.repository.IStrategyRepository;
 import com.learn.domain.strategy.service.annotation.LogicStrategy;
-import com.learn.domain.strategy.service.rule.ILogicFilter;
-import com.learn.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.learn.domain.strategy.service.rule.filter.ILogicFilter;
+import com.learn.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import com.learn.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

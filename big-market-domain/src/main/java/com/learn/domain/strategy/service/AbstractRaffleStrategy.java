@@ -1,16 +1,15 @@
-package com.learn.domain.strategy.service.raffle;
+package com.learn.domain.strategy.service;
 
 
 import com.learn.domain.strategy.model.entity.RaffleAwardEntity;
 import com.learn.domain.strategy.model.entity.RaffleFactoryEntity;
 import com.learn.domain.strategy.model.entity.RuleActionEntity;
-import com.learn.domain.strategy.model.entity.StrategyEntity;
 import com.learn.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import com.learn.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.learn.domain.strategy.repository.IStrategyRepository;
-import com.learn.domain.strategy.service.IRaffleStrategy;
 import com.learn.domain.strategy.service.armory.IStrategyDispatch;
-import com.learn.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.learn.domain.strategy.service.rule.chain.ILogicChain;
+import com.learn.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import com.learn.types.enums.ResponseCode;
 import com.learn.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +30,12 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
 
     protected IStrategyDispatch strategyDispatch;
 
-    public AbstractRaffleStrategy(IStrategyRepository repository, IStrategyDispatch strategyDispatch) {
+    private final DefaultChainFactory defaultChainFactory;
+
+    public AbstractRaffleStrategy(IStrategyRepository repository, IStrategyDispatch strategyDispatch, DefaultChainFactory defaultChainFactory) {
         this.repository = repository;
         this.strategyDispatch = strategyDispatch;
+        this.defaultChainFactory = defaultChainFactory;
     }
 
     @Override
@@ -46,36 +48,16 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
 
-        // 2. 策略查询
-        StrategyEntity strategy = repository.queryStrategyEntityByStrategyId(strategyId);
+        // 2. 获取责任链 - 前置规则的责任链处理
+        ILogicChain logicChain = defaultChainFactory.openLogicChain(strategyId);
 
-        // 3. 抽奖前-规则过滤
-        RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> ruleActionEntity = this.doCheckRaffleBeforeLogic(RaffleFactoryEntity.builder().userId(userId).strategyId(strategyId).build(), strategy.ruleModels());
+        // 3. 通过责任链获取奖品id
+        Integer awardId = logicChain.logic(userId, strategyId);
 
-        if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(ruleActionEntity.getCode())) {
-            if (DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(ruleActionEntity.getRuleModel())) {
-                return RaffleAwardEntity.builder()
-                        .awardId(ruleActionEntity.getData().getAwardId())
-                        .build();
-            } else if (DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode().equals(ruleActionEntity.getRuleModel())) {
-                // 根据返回的信息进行抽奖
-                RuleActionEntity.RaffleBeforeEntity raffleBeforeEntity = ruleActionEntity.getData();
-                String ruleWeightValueKey = raffleBeforeEntity.getRuleWeightValueKey();
-
-                Integer awardId = strategyDispatch.getRandomAwardId(strategyId, ruleWeightValueKey);
-                return RaffleAwardEntity.builder()
-                        .awardId(Long.valueOf(awardId))
-                        .build();
-            }
-        }
-
-        // 4. 默认抽奖
-        Integer awardId = strategyDispatch.getRandomAwardId(strategyId);
-
-        // 5. 查询奖品规则，rule_lock规则：抽奖达到一定次数后解锁
+        // 4. 查询奖品规则，rule_lock规则：抽奖达到一定次数后解锁
         StrategyAwardRuleModelVO strategyAwardRuleModelVO = repository.queryStrategyAwardRuleModels(strategyId, awardId);
 
-        // 6. 抽奖中规则过滤
+        // 5. 抽奖中规则过滤
         RuleActionEntity<RuleActionEntity.RaffleCenterEntity> ruleActionCenterEntity = this.doCheckRaffleCenterLogic(RaffleFactoryEntity.builder()
                 .strategyId(strategyId)
                 .userId(userId)

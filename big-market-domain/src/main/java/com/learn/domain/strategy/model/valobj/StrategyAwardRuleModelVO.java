@@ -1,13 +1,12 @@
 package com.learn.domain.strategy.model.valobj;
 
 
-import com.learn.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import com.learn.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import com.learn.types.common.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.util.bcel.classfile.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
