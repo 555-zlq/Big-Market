@@ -1,6 +1,8 @@
 package com.learn.domain.strategy.service.rule.chain;
 
 
+import com.learn.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
+
 /**
  * @author Carton
  * @date 2025/10/14 11:06
@@ -9,5 +11,5 @@ package com.learn.domain.strategy.service.rule.chain;
 
 public interface ILogicChain extends ILogicChainArmory{
 
-    Integer logic(String userId, Long strategyId);
+    DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId);
 }

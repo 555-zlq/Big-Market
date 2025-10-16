@@ -1,17 +1,15 @@
 package com.learn.test.domain;
 
 
+import com.alibaba.fastjson.JSON;
 import com.learn.domain.strategy.service.armory.IStrategyArmory;
 import com.learn.domain.strategy.service.rule.chain.ILogicChain;
 import com.learn.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import com.learn.domain.strategy.service.rule.chain.impl.RuleWeightLogicChain;
-import com.learn.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
-import com.learn.domain.strategy.service.rule.filter.impl.RuleWeightLogicFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -38,22 +36,18 @@ public class LogicChainTest {
     @Resource
     private DefaultChainFactory defaultChainFactory;
 
-    @Resource
-    private RuleWeightLogicFilter ruleWeightLogicFilter;
-    @Autowired
-    private RuleLockLogicFilter ruleLockLogicFilter;
 
     @Before
     public void setup() {
         strategyArmory.assembleLotteryStrategy(10001L);
-        ReflectionTestUtils.setField(ruleLockLogicFilter, "userRaffleCount", 0L);
+
     }
 
     @Test
     public void test_logicChain_rule_blacklist() {
         ILogicChain logicChain = defaultChainFactory.openLogicChain(10001L);
-        Integer awardId = logicChain.logic("user001", 10001L);
-        log.info("测试结果：{}", awardId);
+        DefaultChainFactory.StrategyAwardVO strategyAwardVO = logicChain.logic("user001", 10001L);
+        log.info("测试结果：{}", JSON.toJSONString(strategyAwardVO));
     }
 
     @Test
@@ -62,15 +56,15 @@ public class LogicChainTest {
         ReflectionTestUtils.setField(ruleWeightLogicChain, "userScore", 4900L);
 
         ILogicChain logicChain = defaultChainFactory.openLogicChain(10001L);
-        Integer awardId = logicChain.logic("carton", 10001L);
-        log.info("测试结果：{}", awardId);
+        DefaultChainFactory.StrategyAwardVO strategyAwardVO = logicChain.logic("carton", 10001L);
+        log.info("测试结果：{}", strategyAwardVO);
     }
 
     @Test
     public void test_LogicChain_rule_default() {
         ILogicChain logicChain = defaultChainFactory.openLogicChain(10001L);
-        Integer awardId = logicChain.logic("carton", 10001L);
-        log.info("测试结果：{}", awardId);
+        DefaultChainFactory.StrategyAwardVO strategyAwardVO = logicChain.logic("carton", 10001L);
+        log.info("测试结果：{}", strategyAwardVO);
     }
 
 

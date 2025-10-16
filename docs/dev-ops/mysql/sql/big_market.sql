@@ -18,7 +18,6 @@
 
 CREATE database if NOT EXISTS `big_market` default character set utf8mb4 collate utf8mb4_0900_ai_ci;
 use `big_market`;
-
 --
 -- Table structure for table `award`
 --
@@ -49,6 +48,95 @@ INSERT INTO `award` VALUES (1,101,'user_credit_random','1,100','用户积分【�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rule_tree`
+--
+
+DROP TABLE IF EXISTS `rule_tree`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rule_tree` (
+                             `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+                             `tree_id` varchar(32) NOT NULL COMMENT '规则树ID',
+                             `tree_name` varchar(64) NOT NULL COMMENT '规则树名称',
+                             `tree_desc` varchar(128) DEFAULT NULL COMMENT '规则树描述',
+                             `tree_node_rule_key` varchar(32) NOT NULL COMMENT '规则树根入口规则',
+                             `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                             `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                             PRIMARY KEY (`id`),
+                             UNIQUE KEY `uq_tree_id` (`tree_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rule_tree`
+--
+
+LOCK TABLES `rule_tree` WRITE;
+/*!40000 ALTER TABLE `rule_tree` DISABLE KEYS */;
+INSERT INTO `rule_tree` VALUES (1,'tree_lock','规则树','规则树','rule_lock','2025-10-16 11:33:01','2025-10-16 11:33:04');
+/*!40000 ALTER TABLE `rule_tree` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rule_tree_node`
+--
+
+DROP TABLE IF EXISTS `rule_tree_node`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rule_tree_node` (
+                                  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+                                  `tree_id` varchar(32) NOT NULL COMMENT '规则树ID',
+                                  `rule_key` varchar(32) NOT NULL COMMENT '规则Key',
+                                  `rule_desc` varchar(64) NOT NULL COMMENT '规则描述',
+                                  `rule_value` varchar(128) DEFAULT NULL COMMENT '规则比值',
+                                  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rule_tree_node`
+--
+
+LOCK TABLES `rule_tree_node` WRITE;
+/*!40000 ALTER TABLE `rule_tree_node` DISABLE KEYS */;
+INSERT INTO `rule_tree_node` VALUES (1,'tree_lock','rule_lock','限定用户已完成N次抽奖后解锁','1','2025-10-16 19:48:09','2025-10-16 19:48:00'),(2,'tree_lock','rule_luck_award','兜底奖品随机积分','1,100','2025-10-16 19:48:00','2025-10-16 19:48:00'),(3,'tree_lock','rule_stock','库存扣减规则',NULL,'2025-10-16 19:49:43','2025-10-16 19:50:02');
+/*!40000 ALTER TABLE `rule_tree_node` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rule_tree_node_line`
+--
+
+DROP TABLE IF EXISTS `rule_tree_node_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rule_tree_node_line` (
+                                       `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+                                       `tree_id` varchar(32) NOT NULL COMMENT '规则树ID',
+                                       `rule_node_from` varchar(32) NOT NULL COMMENT '规则Key节点 From',
+                                       `rule_node_to` varchar(32) NOT NULL COMMENT '规则Key节点 To',
+                                       `rule_limit_type` varchar(8) NOT NULL COMMENT '限定类型；1:=;2:>;3:<;4:>=;5<=;6:enum[枚举范围];',
+                                       `rule_limit_value` varchar(32) NOT NULL COMMENT '限定值（到下个节点）',
+                                       `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                       `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                       PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rule_tree_node_line`
+--
+
+LOCK TABLES `rule_tree_node_line` WRITE;
+/*!40000 ALTER TABLE `rule_tree_node_line` DISABLE KEYS */;
+INSERT INTO `rule_tree_node_line` VALUES (1,'tree_lock','rule_lock','rule_stock','EQUAL','ALLOW','2025-10-16 19:54:39','2025-10-16 19:54:41'),(2,'tree_lock','rule_lock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:55:39','2025-10-16 19:55:41'),(3,'tree_lock','rule_stock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:56:36','2025-10-16 19:56:38');
+/*!40000 ALTER TABLE `rule_tree_node_line` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `strategy`
 --
 
@@ -63,7 +151,7 @@ CREATE TABLE `strategy` (
                             `update_time` datetime NOT NULL COMMENT '更新时间\r\n',
                             `rule_models` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '策略模型',
                             PRIMARY KEY (`id` DESC) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +160,7 @@ CREATE TABLE `strategy` (
 
 LOCK TABLES `strategy` WRITE;
 /*!40000 ALTER TABLE `strategy` DISABLE KEYS */;
-INSERT INTO `strategy` VALUES (2,10003,'测试抽奖中策略','2025-10-13 23:06:11','2025-10-13 22:34:49',NULL),(1,10001,'抽奖策略A','2025-10-14 20:59:01','2025-09-24 21:15:19','rule_blacklist,rule_weight');
+INSERT INTO `strategy` VALUES (3,10006,'抽奖策略规则树','2025-10-16 22:01:43','2025-10-16 19:57:53',NULL),(2,10003,'测试抽奖中策略','2025-10-13 23:06:11','2025-10-13 22:34:49',NULL),(1,10001,'抽奖策略A','2025-10-14 20:59:01','2025-09-24 21:15:19','rule_blacklist,rule_weight');
 /*!40000 ALTER TABLE `strategy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +185,7 @@ CREATE TABLE `strategy_award` (
                                   `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
                                   `sort` int NOT NULL COMMENT '奖品顺序',
                                   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +194,7 @@ CREATE TABLE `strategy_award` (
 
 LOCK TABLES `strategy_award` WRITE;
 /*!40000 ALTER TABLE `strategy_award` DISABLE KEYS */;
-INSERT INTO `strategy_award` VALUES (1,10001,101,'随即积分',NULL,80000,80000,'',0.8000,'2025-10-13 22:46:17','2025-10-13 22:46:17',1),(2,10001,102,'5次使用',NULL,10000,10000,NULL,0.1000,'2025-10-08 19:23:42','2025-10-08 19:23:42',2),(3,10001,103,'10次使用',NULL,5000,5000,NULL,0.0500,'2025-10-08 19:23:42','2025-10-08 19:23:42',3),(4,10001,104,'20次使用',NULL,4000,4000,NULL,0.0400,'2025-10-08 19:23:42','2025-10-08 19:23:42',4),(5,10001,105,'增加gpt-4对话模型',NULL,400,400,NULL,0.0040,'2025-10-08 19:23:42','2025-10-08 19:23:42',5),(6,10001,106,'增加dall-e-2画图模型',NULL,200,200,NULL,0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',6),(7,10001,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock,rule_luck_award',0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',7),(8,10001,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.0019,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(9,10001,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.0001,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(10,10003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock',0.4000,'2025-10-13 23:15:03','2025-10-13 23:15:03',7),(11,10003,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.2000,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(12,10003,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.4000,'2025-09-24 21:55:45','2025-09-24 21:55:45',9);
+INSERT INTO `strategy_award` VALUES (1,10001,101,'随即积分',NULL,80000,80000,'',0.8000,'2025-10-13 22:46:17','2025-10-13 22:46:17',1),(2,10001,102,'5次使用',NULL,10000,10000,NULL,0.1000,'2025-10-08 19:23:42','2025-10-08 19:23:42',2),(3,10001,103,'10次使用',NULL,5000,5000,NULL,0.0500,'2025-10-08 19:23:42','2025-10-08 19:23:42',3),(4,10001,104,'20次使用',NULL,4000,4000,NULL,0.0400,'2025-10-08 19:23:42','2025-10-08 19:23:42',4),(5,10001,105,'增加gpt-4对话模型',NULL,400,400,NULL,0.0040,'2025-10-08 19:23:42','2025-10-08 19:23:42',5),(6,10001,106,'增加dall-e-2画图模型',NULL,200,200,NULL,0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',6),(7,10001,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock,rule_luck_award',0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',7),(8,10001,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.0019,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(9,10001,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.0001,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(10,10003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock',0.4000,'2025-10-13 23:15:03','2025-10-13 23:15:03',7),(11,10003,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.2000,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(12,10003,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.4000,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(13,10006,101,'随机积分','<null>',3,3,'tree_lock',0.0300,'2025-10-16 19:59:34','2025-10-16 19:59:36',1),(14,10006,102,'随机积分','<null>',97,97,'tree_lock',0.9700,'2025-10-16 19:59:34','2025-10-16 19:59:36',1);
 /*!40000 ALTER TABLE `strategy_award` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-14 21:10:19
+-- Dump completed on 2025-10-16 22:07:37

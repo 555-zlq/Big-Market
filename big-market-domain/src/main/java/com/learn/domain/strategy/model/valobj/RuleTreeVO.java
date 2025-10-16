@@ -20,7 +20,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class RuleTreeVO {
     /** 规则树 id*/
-    private Integer treeId;
+    private String treeId;
     /** 规则树 名称*/
     private String  treeName;
     /** 规则树 描述*/

@@ -33,8 +33,8 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
 
 
     @Override
-    public DefaultTreeFactory.StrategyAwardData process(String userId, Long strategyId, Long awardId) {
-        DefaultTreeFactory.StrategyAwardData strategyAwardData = null;
+    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Long awardId) {
+        DefaultTreeFactory.StrategyAwardVO strategyAwardData = null;
 
         // 获取基础信息
         String nextNode = ruleTreeVO.getTreeRootRuleNode();
