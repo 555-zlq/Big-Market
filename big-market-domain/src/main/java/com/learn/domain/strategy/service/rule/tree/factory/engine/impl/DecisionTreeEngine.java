@@ -45,9 +45,9 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         while (null != nextNode) {
             // 获取决策节点
             ILogicTreeNode logicTreeNode = logicTreeNodeGroup.get(ruleTreeNode.getRuleKey());
-
+            String ruleValue = ruleTreeNode.getRuleValue();
             // 决策节点计算
-            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId);
+            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId, ruleValue);
             RuleLogicCheckTypeVO ruleLogicCheckTypeVO = logicEntity.getRuleLogicCheckTypeVO();
             strategyAwardData = logicEntity.getStrategyAwardData();
             log.info("决策树引擎【{}】treeId: {} node:{} code:{}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), nextNode, ruleLogicCheckTypeVO.getCode());
@@ -61,14 +61,19 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
     }
 
     private String nextNode(String matterValue, List<RuleTreeNodeLineVO> treeNodeLineVOList) {
+        // 如果没有线即没有下一个节点， 返回null
         if (null == treeNodeLineVOList || treeNodeLineVOList.isEmpty()) return null;
+        // 遍历每条线
         for (RuleTreeNodeLineVO nodeLine : treeNodeLineVOList) {
             if (decisionLogic(matterValue, nodeLine)) {
                 return nodeLine.getRuleNodeTo();
             }
         }
-        throw new RuntimeException("决策树引擎，nextNode计算失败 未找到可执行的节点");
+        // 执行到这里，说明有线连接到下一个节点，但是每个节点都无法到达，属于特殊情况
+//        throw new RuntimeException("决策树引擎，nextNode计算失败 未找到可执行的节点");
+        return null;
     }
+
 
     private boolean decisionLogic(String matterValue, RuleTreeNodeLineVO nodeLine) {
         switch (nodeLine.getRuleLimitTypeVO()) {

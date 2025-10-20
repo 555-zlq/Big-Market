@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 
 @Slf4j
-public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
+public abstract class AbstractRaffleStrategy implements IRaffleStrategy, IRaffleStock {
 
     // protected关键字，代表可以被继承访问，不可以被外部类访问，常用在抽象类的设计中
     // 策略仓储服务，提供对数据库的操作

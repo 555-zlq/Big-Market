@@ -159,4 +159,20 @@ public class RedissonService implements IRedisService{
         return redissonClient.getBloomFilter(key);
     }
 
+    @Override
+    public void setAtomicLong(String key, Integer value) {
+        // 分布式原子计数器，实现在多机之间的自增，自减并保持原子性
+        redissonClient.getAtomicLong(key).set(value);
+    }
+
+    @Override
+    public Long getAtomicLong(String cacheKey) {
+        return redissonClient.getAtomicLong(cacheKey).get();
+    }
+
+    @Override
+    public Boolean setNx(String lockKey) {
+        return redissonClient.getBucket(lockKey).trySet("lock");
+    }
+
 }
