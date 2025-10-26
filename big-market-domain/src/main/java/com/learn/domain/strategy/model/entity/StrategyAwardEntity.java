@@ -24,10 +24,16 @@ public class StrategyAwardEntity {
     private Long strategyId;
     /** 抽奖奖品id */
     private Long awardId;
+    /** 抽奖奖品标题 */
+    private String awardTitle;
+    /** 抽奖奖品副标题 */
+    private String awardSubTitle;
     /** 奖品中奖概率 */
     private BigDecimal awardRate;
     /** 奖品库存总量 */
     private Integer awardCount;
     /** 奖品库存剩余 */
     private Integer awardCountSurplus;
+    /** 抽奖奖品排序 */
+    private Integer sort;
 }

@@ -15,7 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 CREATE database if NOT EXISTS `big_market` default character set utf8mb4 collate utf8mb4_0900_ai_ci;
 use `big_market`;
 --
@@ -64,7 +63,7 @@ CREATE TABLE `rule_tree` (
                              `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
                              PRIMARY KEY (`id`),
                              UNIQUE KEY `uq_tree_id` (`tree_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +72,7 @@ CREATE TABLE `rule_tree` (
 
 LOCK TABLES `rule_tree` WRITE;
 /*!40000 ALTER TABLE `rule_tree` DISABLE KEYS */;
-INSERT INTO `rule_tree` VALUES (1,'tree_lock','规则树','规则树','rule_lock','2025-10-16 11:33:01','2025-10-16 11:33:04');
+INSERT INTO `rule_tree` VALUES (1,'tree_lock','规则树','规则树','rule_lock','2025-10-16 11:33:01','2025-10-16 11:33:04'),(2,'tree_lock_1','规则树','规则树','rule_lock','2025-10-26 20:33:25','2025-10-26 20:33:27'),(3,'tree_lock_2','规则树','规则树','rule_lock','2025-10-26 20:33:56','2025-10-26 20:33:58'),(4,'tree_luck_award','规则树-兜底奖励','规则树-兜底奖励','rule_stock','2025-10-26 20:34:53','2025-10-26 20:34:54');
 /*!40000 ALTER TABLE `rule_tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +92,7 @@ CREATE TABLE `rule_tree_node` (
                                   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                                   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
                                   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +101,7 @@ CREATE TABLE `rule_tree_node` (
 
 LOCK TABLES `rule_tree_node` WRITE;
 /*!40000 ALTER TABLE `rule_tree_node` DISABLE KEYS */;
-INSERT INTO `rule_tree_node` VALUES (1,'tree_lock','rule_lock','限定用户已完成N次抽奖后解锁','1','2025-10-16 19:48:09','2025-10-16 19:48:00'),(2,'tree_lock','rule_luck_award','兜底奖品随机积分','1,100','2025-10-16 19:48:00','2025-10-16 19:48:00'),(3,'tree_lock','rule_stock','库存扣减规则',NULL,'2025-10-16 19:49:43','2025-10-16 19:50:02');
+INSERT INTO `rule_tree_node` VALUES (1,'tree_lock','rule_lock','限定用户已完成N次抽奖后解锁','1','2025-10-16 19:48:09','2025-10-16 19:48:00'),(2,'tree_lock','rule_luck_award','兜底奖品随机积分','101:1,100','2025-10-16 19:48:00','2025-10-17 16:45:57'),(3,'tree_lock','rule_stock','库存扣减规则',NULL,'2025-10-16 19:49:43','2025-10-16 19:50:02'),(4,'tree_lock_1','rule_lock','限定用户已完成N次抽奖后解锁','1','2025-10-26 20:35:42','2025-10-26 20:35:45'),(5,'tree_lock_1','rule_luck_award','兜底奖品随机积分','101:1,100','2025-10-26 20:36:34','2025-10-26 20:36:35'),(6,'tree_lock_1','rule_stock','库存扣减规则',NULL,'2025-10-26 20:37:08','2025-10-26 20:37:10'),(7,'tree_luck_award','rule_stock','库存扣减规则',NULL,'2025-10-26 20:37:43','2025-10-26 20:37:44'),(8,'tree_luck_award','rule_luck_award','兜底奖品随机积分','101:1,100','2025-10-26 20:38:14','2025-10-26 20:38:16'),(9,'tree_lock_2','rule_lock','限定用户已完成N次抽奖后解锁','2','2025-10-26 20:38:48','2025-10-26 20:38:50'),(10,'tree_lock_2','rule_luck_award','兜底奖品随机积分','101:1,100','2025-10-26 20:39:20','2025-10-26 20:39:22'),(11,'tree_lock_2','rule_stock','库存扣减规则',NULL,'2025-10-26 20:39:48','2025-10-26 20:39:50');
 /*!40000 ALTER TABLE `rule_tree_node` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +122,7 @@ CREATE TABLE `rule_tree_node_line` (
                                        `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                                        `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
                                        PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +131,7 @@ CREATE TABLE `rule_tree_node_line` (
 
 LOCK TABLES `rule_tree_node_line` WRITE;
 /*!40000 ALTER TABLE `rule_tree_node_line` DISABLE KEYS */;
-INSERT INTO `rule_tree_node_line` VALUES (1,'tree_lock','rule_lock','rule_stock','EQUAL','ALLOW','2025-10-16 19:54:39','2025-10-16 19:54:41'),(2,'tree_lock','rule_lock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:55:39','2025-10-16 19:55:41'),(3,'tree_lock','rule_stock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:56:36','2025-10-16 19:56:38');
+INSERT INTO `rule_tree_node_line` VALUES (1,'tree_lock','rule_lock','rule_stock','EQUAL','ALLOW','2025-10-16 19:54:39','2025-10-16 19:54:41'),(2,'tree_lock','rule_lock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:55:39','2025-10-16 19:55:41'),(3,'tree_lock','rule_stock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:56:36','2025-10-16 19:56:38'),(4,'tree_lock_1','rule_lock','rule_stock','EQUAL','ALLOW','2025-10-16 19:54:39','2025-10-16 19:54:41'),(5,'tree_lock_1','rule_lock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:55:39','2025-10-16 19:55:41'),(6,'tree_lock_1','rule_stock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:56:36','2025-10-16 19:56:38'),(7,'tree_luck_award','rule_stock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-26 20:43:49','2025-10-26 20:43:51'),(8,'tree_lock_2','rule_lock','rule_stock','EQUAL','ALLOW','2025-10-16 19:54:39','2025-10-16 19:54:41'),(9,'tree_lock_2','rule_lock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:55:39','2025-10-16 19:55:41'),(10,'tree_lock_2','rule_stock','rule_luck_award','EQUAL','TAKE_OVER','2025-10-16 19:56:36','2025-10-16 19:56:38');
 /*!40000 ALTER TABLE `rule_tree_node_line` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +184,7 @@ CREATE TABLE `strategy_award` (
                                   `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
                                   `sort` int NOT NULL COMMENT '奖品顺序',
                                   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +193,7 @@ CREATE TABLE `strategy_award` (
 
 LOCK TABLES `strategy_award` WRITE;
 /*!40000 ALTER TABLE `strategy_award` DISABLE KEYS */;
-INSERT INTO `strategy_award` VALUES (1,10001,101,'随即积分',NULL,80000,80000,'',0.8000,'2025-10-13 22:46:17','2025-10-13 22:46:17',1),(2,10001,102,'5次使用',NULL,10000,10000,NULL,0.1000,'2025-10-08 19:23:42','2025-10-08 19:23:42',2),(3,10001,103,'10次使用',NULL,5000,5000,NULL,0.0500,'2025-10-08 19:23:42','2025-10-08 19:23:42',3),(4,10001,104,'20次使用',NULL,4000,4000,NULL,0.0400,'2025-10-08 19:23:42','2025-10-08 19:23:42',4),(5,10001,105,'增加gpt-4对话模型',NULL,400,400,NULL,0.0040,'2025-10-08 19:23:42','2025-10-08 19:23:42',5),(6,10001,106,'增加dall-e-2画图模型',NULL,200,200,NULL,0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',6),(7,10001,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock,rule_luck_award',0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',7),(8,10001,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.0019,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(9,10001,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.0001,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(10,10003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock',0.4000,'2025-10-13 23:15:03','2025-10-13 23:15:03',7),(11,10003,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.2000,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(12,10003,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.4000,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(13,10006,101,'随机积分','<null>',3,3,'tree_lock',0.0300,'2025-10-16 19:59:34','2025-10-16 19:59:36',1),(14,10006,102,'随机积分','<null>',97,97,'tree_lock',0.9700,'2025-10-16 19:59:34','2025-10-16 19:59:36',1);
+INSERT INTO `strategy_award` VALUES (1,10001,101,'随即积分',NULL,80000,80000,'',0.8000,'2025-10-13 22:46:17','2025-10-13 22:46:17',1),(2,10001,102,'5次使用',NULL,10000,10000,NULL,0.1000,'2025-10-08 19:23:42','2025-10-08 19:23:42',2),(3,10001,103,'10次使用',NULL,5000,5000,NULL,0.0500,'2025-10-08 19:23:42','2025-10-08 19:23:42',3),(4,10001,104,'20次使用',NULL,4000,4000,NULL,0.0400,'2025-10-08 19:23:42','2025-10-08 19:23:42',4),(5,10001,105,'增加gpt-4对话模型',NULL,400,400,NULL,0.0040,'2025-10-08 19:23:42','2025-10-08 19:23:42',5),(6,10001,106,'增加dall-e-2画图模型',NULL,200,200,NULL,0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',6),(7,10001,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock,rule_luck_award',0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',7),(8,10001,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.0019,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(9,10001,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.0001,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(10,10003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock',0.4000,'2025-10-13 23:15:03','2025-10-13 23:15:03',7),(11,10003,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.2000,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(12,10003,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.4000,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(13,10006,101,'随机积分','<null>',100,87,'tree_luck_award',0.0200,'2025-10-26 21:23:49','2025-10-26 21:23:49',1),(14,10006,102,'7等奖','<null>',100,61,'tree_luck_award',0.0300,'2025-10-26 21:23:44','2025-10-26 21:23:44',2),(15,10006,103,'6等奖',NULL,100,71,'tree_luck_award',0.0300,'2025-10-26 16:39:27','2025-10-26 16:39:31',3),(16,10006,104,'5等奖',NULL,100,68,'tree_luck_award',0.0300,'2025-10-26 20:27:49','2025-10-26 20:27:51',4),(17,10006,105,'4等奖',NULL,100,74,'tree_luck_award',0.0300,'2025-10-26 20:28:57','2025-10-26 20:28:58',5),(18,10006,106,'3等奖','抽奖1次后解锁',100,67,'tree_lock_1',0.0300,'2025-10-26 21:23:40','2025-10-26 21:23:40',6),(19,10006,107,'2等奖','抽奖1次后解锁',100,71,'tree_lock_1',0.0300,'2025-10-26 21:23:54','2025-10-26 21:23:54',7),(20,10006,108,'1等奖','抽奖2次后解锁',100,74,'tree_lock_2',0.0300,'2025-10-26 20:32:09','2025-10-26 20:32:11',8);
 /*!40000 ALTER TABLE `strategy_award` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,4 +237,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-16 22:07:37
+-- Dump completed on 2025-10-26 21:25:11

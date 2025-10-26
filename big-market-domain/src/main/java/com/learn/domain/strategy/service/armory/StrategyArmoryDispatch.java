@@ -31,7 +31,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
     private IStrategyRepository repository;
 
     @Override
-    public void assembleLotteryStrategy(Long strategyId) {
+    public boolean assembleLotteryStrategy(Long strategyId) {
         // 1. 查询策略配置
         List<StrategyAwardEntity> strategyAwardEntities =  repository.queryStrategyAwardList(strategyId);
 
@@ -49,7 +49,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         // 2.1 抽取策略实体
         StrategyEntity strategyEntity = repository.queryStrategyEntityByStrategyId(strategyId);
         String ruleWeight = strategyEntity.getRuleWeight();
-        if (ruleWeight == null) return;
+        if (ruleWeight == null) return true;
 
         // 2.2 抽取策略规则实体
         StrategyRuleEntity strategyRuleEntity = repository.queryStrategyRuleEntity(strategyId, ruleWeight);
@@ -68,6 +68,8 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
             strategyAwardEntitiesClone.removeIf(entity->!ruleWeightValues.contains(entity.getAwardId()));
             assembleLotteryStrategy(String.valueOf(strategyId).concat("_").concat(key), strategyAwardEntitiesClone);
         }
+
+        return true;
 
     }
 

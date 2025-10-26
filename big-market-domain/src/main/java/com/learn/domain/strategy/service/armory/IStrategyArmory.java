@@ -14,7 +14,7 @@ public interface IStrategyArmory {
      *
      * @param strategyId
      */
-    void assembleLotteryStrategy(Long strategyId);
+    boolean assembleLotteryStrategy(Long strategyId);
 
 
 }
