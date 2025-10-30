@@ -47,6 +47,72 @@ INSERT INTO `award` VALUES (1,101,'user_credit_random','1,100','用户积分【�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `raffle_activity`
+--
+
+DROP TABLE IF EXISTS `raffle_activity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `raffle_activity` (
+                                   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增id',
+                                   `activity_id` bigint NOT NULL COMMENT '活动id',
+                                   `activity_name` varchar(64) NOT NULL COMMENT '活动名称',
+                                   `activity_desc` varchar(128) NOT NULL COMMENT '活动描述',
+                                   `begin_date_time` datetime NOT NULL COMMENT '开始时间',
+                                   `end_date_time` datetime NOT NULL COMMENT '结束时间',
+                                   `stock_count` int NOT NULL COMMENT '库存总量',
+                                   `stock_count_surplus` int NOT NULL COMMENT '剩余库存',
+                                   `activity_count_id` bigint NOT NULL COMMENT '活动参与次数配置',
+                                   `strategy_id` bigint NOT NULL COMMENT '抽奖策略ID',
+                                   `state` varchar(8) NOT NULL COMMENT '活动状态',
+                                   `create_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+                                   `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                   PRIMARY KEY (`id`),
+                                   UNIQUE KEY `uq_activity_id` (`activity_id`),
+                                   KEY `idx_begin_date_time` (`begin_date_time`),
+                                   KEY `idx_end_date_time` (`end_date_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `raffle_activity`
+--
+
+LOCK TABLES `raffle_activity` WRITE;
+/*!40000 ALTER TABLE `raffle_activity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `raffle_activity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `raffle_activity_count`
+--
+
+DROP TABLE IF EXISTS `raffle_activity_count`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `raffle_activity_count` (
+                                         `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+                                         `activity_count_id` bigint NOT NULL COMMENT '活动次数编号',
+                                         `total_count` int NOT NULL COMMENT '总次数',
+                                         `day_count` int NOT NULL COMMENT '日次数',
+                                         `month_count` int NOT NULL COMMENT '月次数',
+                                         `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                         `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                         PRIMARY KEY (`id`),
+                                         UNIQUE KEY `uq_activity_count_id` (`activity_count_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动次数配置表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `raffle_activity_count`
+--
+
+LOCK TABLES `raffle_activity_count` WRITE;
+/*!40000 ALTER TABLE `raffle_activity_count` DISABLE KEYS */;
+/*!40000 ALTER TABLE `raffle_activity_count` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `rule_tree`
 --
 
@@ -193,7 +259,7 @@ CREATE TABLE `strategy_award` (
 
 LOCK TABLES `strategy_award` WRITE;
 /*!40000 ALTER TABLE `strategy_award` DISABLE KEYS */;
-INSERT INTO `strategy_award` VALUES (1,10001,101,'随即积分',NULL,80000,80000,'',0.8000,'2025-10-13 22:46:17','2025-10-13 22:46:17',1),(2,10001,102,'5次使用',NULL,10000,10000,NULL,0.1000,'2025-10-08 19:23:42','2025-10-08 19:23:42',2),(3,10001,103,'10次使用',NULL,5000,5000,NULL,0.0500,'2025-10-08 19:23:42','2025-10-08 19:23:42',3),(4,10001,104,'20次使用',NULL,4000,4000,NULL,0.0400,'2025-10-08 19:23:42','2025-10-08 19:23:42',4),(5,10001,105,'增加gpt-4对话模型',NULL,400,400,NULL,0.0040,'2025-10-08 19:23:42','2025-10-08 19:23:42',5),(6,10001,106,'增加dall-e-2画图模型',NULL,200,200,NULL,0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',6),(7,10001,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock,rule_luck_award',0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',7),(8,10001,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.0019,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(9,10001,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.0001,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(10,10003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock',0.4000,'2025-10-13 23:15:03','2025-10-13 23:15:03',7),(11,10003,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.2000,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(12,10003,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.4000,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(13,10006,101,'随机积分','<null>',100,87,'tree_luck_award',0.0200,'2025-10-26 21:23:49','2025-10-26 21:23:49',1),(14,10006,102,'7等奖','<null>',100,61,'tree_luck_award',0.0300,'2025-10-26 21:23:44','2025-10-26 21:23:44',2),(15,10006,103,'6等奖',NULL,100,71,'tree_luck_award',0.0300,'2025-10-26 16:39:27','2025-10-26 16:39:31',3),(16,10006,104,'5等奖',NULL,100,68,'tree_luck_award',0.0300,'2025-10-26 20:27:49','2025-10-26 20:27:51',4),(17,10006,105,'4等奖',NULL,100,74,'tree_luck_award',0.0300,'2025-10-26 20:28:57','2025-10-26 20:28:58',5),(18,10006,106,'3等奖','抽奖1次后解锁',100,67,'tree_lock_1',0.0300,'2025-10-26 21:23:40','2025-10-26 21:23:40',6),(19,10006,107,'2等奖','抽奖1次后解锁',100,71,'tree_lock_1',0.0300,'2025-10-26 21:23:54','2025-10-26 21:23:54',7),(20,10006,108,'1等奖','抽奖2次后解锁',100,74,'tree_lock_2',0.0300,'2025-10-26 20:32:09','2025-10-26 20:32:11',8);
+INSERT INTO `strategy_award` VALUES (1,10001,101,'随即积分',NULL,80000,80000,'',0.8000,'2025-10-13 22:46:17','2025-10-13 22:46:17',1),(2,10001,102,'5次使用',NULL,10000,10000,NULL,0.1000,'2025-10-08 19:23:42','2025-10-08 19:23:42',2),(3,10001,103,'10次使用',NULL,5000,5000,NULL,0.0500,'2025-10-08 19:23:42','2025-10-08 19:23:42',3),(4,10001,104,'20次使用',NULL,4000,4000,NULL,0.0400,'2025-10-08 19:23:42','2025-10-08 19:23:42',4),(5,10001,105,'增加gpt-4对话模型',NULL,400,400,NULL,0.0040,'2025-10-08 19:23:42','2025-10-08 19:23:42',5),(6,10001,106,'增加dall-e-2画图模型',NULL,200,200,NULL,0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',6),(7,10001,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock,rule_luck_award',0.0020,'2025-10-08 19:23:42','2025-10-08 19:23:42',7),(8,10001,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.0019,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(9,10001,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.0001,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(10,10003,107,'增加dall-e-3画图模型','抽奖1次后解锁',200,200,'rule_lock',0.4000,'2025-10-13 23:15:03','2025-10-13 23:15:03',7),(11,10003,108,'增加100次使用','抽奖2次后解锁',199,199,'rule_lock',0.2000,'2025-10-08 19:23:42','2025-10-08 19:23:42',8),(12,10003,109,'解锁全部模型','抽奖6次后解锁',1,1,'rule_lock',0.4000,'2025-09-24 21:55:45','2025-09-24 21:55:45',9),(13,10006,101,'随机积分','<null>',100,85,'tree_luck_award',0.0200,'2025-10-28 22:53:25','2025-10-28 22:53:25',1),(14,10006,102,'7等奖','<null>',100,60,'tree_luck_award',0.0300,'2025-10-28 22:53:35','2025-10-28 22:53:35',2),(15,10006,103,'6等奖',NULL,100,71,'tree_luck_award',0.0300,'2025-10-26 16:39:27','2025-10-26 16:39:31',3),(16,10006,104,'5等奖',NULL,100,68,'tree_luck_award',0.0300,'2025-10-26 20:27:49','2025-10-26 20:27:51',4),(17,10006,105,'4等奖',NULL,100,74,'tree_luck_award',0.0300,'2025-10-26 20:28:57','2025-10-26 20:28:58',5),(18,10006,106,'3等奖','抽奖1次后解锁',100,67,'tree_lock_1',0.0300,'2025-10-26 21:23:40','2025-10-26 21:23:40',6),(19,10006,107,'2等奖','抽奖1次后解锁',100,71,'tree_lock_1',0.0300,'2025-10-26 21:23:54','2025-10-26 21:23:54',7),(20,10006,108,'1等奖','抽奖2次后解锁',100,74,'tree_lock_2',0.0300,'2025-10-26 20:32:09','2025-10-26 20:32:11',8);
 /*!40000 ALTER TABLE `strategy_award` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-26 21:25:11
+-- Dump completed on 2025-10-30 21:41:31
