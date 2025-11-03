@@ -1,10 +1,9 @@
-package com.learn.test.domain;
+package com.learn.test.domain.strategy;
 
 
 import com.learn.domain.strategy.service.armory.IStrategyArmory;
 import com.learn.domain.strategy.service.armory.IStrategyDispatch;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

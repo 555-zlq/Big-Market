@@ -17,7 +17,6 @@
 
 CREATE database if NOT EXISTS `big_market` default character set utf8mb4;
 use `big_market`;
-
 --
 -- Table structure for table `award`
 --
@@ -61,9 +60,6 @@ CREATE TABLE `raffle_activity` (
   `activity_desc` varchar(128) NOT NULL COMMENT '活动描述',
   `begin_date_time` datetime NOT NULL COMMENT '开始时间',
   `end_date_time` datetime NOT NULL COMMENT '结束时间',
-  `stock_count` int NOT NULL COMMENT '库存总量',
-  `stock_count_surplus` int NOT NULL COMMENT '剩余库存',
-  `activity_count_id` bigint NOT NULL COMMENT '活动参与次数配置',
   `strategy_id` bigint NOT NULL COMMENT '抽奖策略ID',
   `state` varchar(8) NOT NULL COMMENT '活动状态',
   `create_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -72,7 +68,7 @@ CREATE TABLE `raffle_activity` (
   UNIQUE KEY `uq_activity_id` (`activity_id`),
   KEY `idx_begin_date_time` (`begin_date_time`),
   KEY `idx_end_date_time` (`end_date_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +77,7 @@ CREATE TABLE `raffle_activity` (
 
 LOCK TABLES `raffle_activity` WRITE;
 /*!40000 ALTER TABLE `raffle_activity` DISABLE KEYS */;
-INSERT INTO `raffle_activity` VALUES (1,100301,'测试活动','测试活动','2024-03-09 10:15:10','2034-03-09 10:15:10',1000,1000,1,10006,'0','2025-10-30 23:01:22','2025-10-30 23:01:22');
+INSERT INTO `raffle_activity` VALUES (2,100301,'测试活动','测试活动','2025-11-03 21:25:12','2025-11-03 21:25:15',10006,'create','2025-11-03 21:25:37','2025-11-03 21:25:40');
 /*!40000 ALTER TABLE `raffle_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,8 +107,40 @@ CREATE TABLE `raffle_activity_count` (
 
 LOCK TABLES `raffle_activity_count` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_count` DISABLE KEYS */;
-INSERT INTO `raffle_activity_count` VALUES (1,1,100,2,60,'2024-03-09 10:15:42','2024-03-09 10:15:42');
+INSERT INTO `raffle_activity_count` VALUES (1,11101,1,1,1,'2024-03-09 10:15:42','2024-03-16 12:30:54');
 /*!40000 ALTER TABLE `raffle_activity_count` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `raffle_activity_sku`
+--
+
+DROP TABLE IF EXISTS `raffle_activity_sku`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `raffle_activity_sku` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `sku` bigint NOT NULL COMMENT '商品sku - 把每一个组合当做一个商品',
+  `activity_id` bigint NOT NULL COMMENT '活动ID',
+  `activity_count_id` bigint NOT NULL COMMENT '活动个人参与次数ID',
+  `stock_count` int NOT NULL COMMENT '商品库存',
+  `stock_count_surplus` int NOT NULL COMMENT '剩余库存',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_sku` (`sku`),
+  KEY `idx_activity_id_activity_count_id` (`activity_id`,`activity_count_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `raffle_activity_sku`
+--
+
+LOCK TABLES `raffle_activity_sku` WRITE;
+/*!40000 ALTER TABLE `raffle_activity_sku` DISABLE KEYS */;
+INSERT INTO `raffle_activity_sku` VALUES (1,9011,100301,11101,0,0,'2025-11-03 21:26:35','2025-11-03 21:26:33');
+/*!40000 ALTER TABLE `raffle_activity_sku` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -306,4 +334,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-30 23:09:59
+-- Dump completed on 2025-11-03 21:37:01

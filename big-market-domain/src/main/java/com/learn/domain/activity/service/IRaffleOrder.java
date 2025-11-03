@@ -1,0 +1,23 @@
+package com.learn.domain.activity.service;
+
+
+import com.learn.domain.activity.model.entity.ActivityOrderEntity;
+import com.learn.domain.activity.model.entity.ActivityShopCarEntity;
+
+/**
+ * @author Carton
+ * @date 2025/11/3 20:43
+ * @description TODO: 抽奖活动订单接口
+ */
+
+public interface IRaffleOrder {
+
+    /***
+     * 以sku创建抽奖活动订单
+     *
+     * @param activityShopCarEntity 活动sku实体，通过sku领取活动
+     * @return 活动参与记录实体
+     */
+    ActivityOrderEntity createRaffleActivityOrder(ActivityShopCarEntity activityShopCarEntity);
+
+}

@@ -1,4 +1,4 @@
-package com.learn.test.domain;
+package com.learn.test.domain.strategy;
 
 
 import com.alibaba.fastjson.JSON;
