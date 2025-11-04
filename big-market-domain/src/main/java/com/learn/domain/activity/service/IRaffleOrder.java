@@ -3,6 +3,7 @@ package com.learn.domain.activity.service;
 
 import com.learn.domain.activity.model.entity.ActivityOrderEntity;
 import com.learn.domain.activity.model.entity.ActivityShopCarEntity;
+import com.learn.domain.activity.model.entity.SkuRechargeEntity;
 
 /**
  * @author Carton
@@ -19,5 +20,7 @@ public interface IRaffleOrder {
      * @return 活动参与记录实体
      */
     ActivityOrderEntity createRaffleActivityOrder(ActivityShopCarEntity activityShopCarEntity);
+
+    String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 
 }

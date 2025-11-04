@@ -1,5 +1,6 @@
 package com.learn.infrastructure.persistent.dao;
 
+import com.learn.infrastructure.persistent.po.RaffleActivityAccount;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,5 +12,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IRaffleActivityAccountDao {
 
+    int updateAccountQuota(RaffleActivityAccount activityAccount);
+
+    void insert(RaffleActivityAccount activityAccount);
 }
 
