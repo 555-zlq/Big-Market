@@ -3,6 +3,8 @@ package com.learn.infrastructure.persistent.redis;
 
 import org.redisson.api.*;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author Carton
  * @date 2025/9/28 21:35
@@ -256,4 +258,6 @@ public interface IRedisService {
     Long getAtomicLong(String cacheKey);
 
     Boolean setNx(String lockKey);
+
+    Boolean setNx(String lockKey, long expireMills, TimeUnit timeUnit);
 }

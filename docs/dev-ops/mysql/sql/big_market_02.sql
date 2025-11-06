@@ -60,18 +60,24 @@ DROP TABLE IF EXISTS `raffle_activity_order_000`;
 CREATE TABLE `raffle_activity_order_000` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `user_id` varchar(32) NOT NULL COMMENT '用户ID',
+  `sku` bigint NOT NULL COMMENT '商品sku',
   `activity_id` bigint NOT NULL COMMENT '活动ID',
   `activity_name` varchar(64) NOT NULL COMMENT '活动名称',
   `strategy_id` bigint NOT NULL COMMENT '抽奖策略ID',
   `order_id` varchar(12) NOT NULL COMMENT '订单ID',
   `order_time` datetime NOT NULL COMMENT '下单时间',
-  `state` varchar(8) NOT NULL COMMENT '订单状态（not_used、used、expire）',
+  `total_count` int NOT NULL COMMENT '总次数',
+  `day_count` int NOT NULL COMMENT '日次数',
+  `month_count` int NOT NULL COMMENT '月次数',
+  `state` varchar(16) NOT NULL DEFAULT 'complete' COMMENT '订单状态（complete）',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传的，确保幂等',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
+  UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +86,6 @@ CREATE TABLE `raffle_activity_order_000` (
 
 LOCK TABLES `raffle_activity_order_000` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_000` DISABLE KEYS */;
-INSERT INTO `raffle_activity_order_000` VALUES (1,'VLhpfQGTMDYpsBZxvfBoeygjb',100301,'测试活动',10006,'270642040395','2025-10-30 16:14:00','not_used','2025-10-31 00:13:59','2025-10-31 00:13:59'),(2,'VLhpfQGTMDYpsBZxvfBoeygjb',100301,'测试活动',10006,'535964228732','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(3,'sPB',100301,'测试活动',10006,'289001027549','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(4,'dwprLNbgNvZUMpqAXLJbjE',100301,'测试活动',10006,'818587515602','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(5,'TiQaUNWftniOAotnzWvkQt',100301,'测试活动',10006,'850583214870','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(6,'zGVyIdgFUYNdkFYkkjNIeENlreqFLC',100301,'测试活动',10006,'093183920482','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33');
 /*!40000 ALTER TABLE `raffle_activity_order_000` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,18 +99,24 @@ DROP TABLE IF EXISTS `raffle_activity_order_001`;
 CREATE TABLE `raffle_activity_order_001` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `user_id` varchar(32) NOT NULL COMMENT '用户ID',
+  `sku` bigint NOT NULL COMMENT '商品sku',
   `activity_id` bigint NOT NULL COMMENT '活动ID',
   `activity_name` varchar(64) NOT NULL COMMENT '活动名称',
   `strategy_id` bigint NOT NULL COMMENT '抽奖策略ID',
   `order_id` varchar(12) NOT NULL COMMENT '订单ID',
   `order_time` datetime NOT NULL COMMENT '下单时间',
-  `state` varchar(8) NOT NULL COMMENT '订单状态（not_used、used、expire）',
+  `total_count` int NOT NULL COMMENT '总次数',
+  `day_count` int NOT NULL COMMENT '日次数',
+  `month_count` int NOT NULL COMMENT '月次数',
+  `state` varchar(16) NOT NULL DEFAULT 'complete' COMMENT '订单状态（complete）',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传的，确保幂等',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
+  UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +125,6 @@ CREATE TABLE `raffle_activity_order_001` (
 
 LOCK TABLES `raffle_activity_order_001` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_001` DISABLE KEYS */;
-INSERT INTO `raffle_activity_order_001` VALUES (1,'qszYL',100301,'测试活动',10006,'475426945641','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(2,'Oxm',100301,'测试活动',10006,'425289750576','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(3,'WoaMAzEEplqjJ',100301,'测试活动',10006,'569622889899','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(4,'FthRIkE',100301,'测试活动',10006,'460925439229','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(5,'M',100301,'测试活动',10006,'147717791811','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(6,'YFBlWcoVdFXlfhbUilkMpiHDMU',100301,'测试活动',10006,'750756308804','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(7,'etqguztl',100301,'测试活动',10006,'678756702834','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33');
 /*!40000 ALTER TABLE `raffle_activity_order_001` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,18 +138,24 @@ DROP TABLE IF EXISTS `raffle_activity_order_002`;
 CREATE TABLE `raffle_activity_order_002` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `user_id` varchar(32) NOT NULL COMMENT '用户ID',
+  `sku` bigint NOT NULL COMMENT '商品sku',
   `activity_id` bigint NOT NULL COMMENT '活动ID',
   `activity_name` varchar(64) NOT NULL COMMENT '活动名称',
   `strategy_id` bigint NOT NULL COMMENT '抽奖策略ID',
   `order_id` varchar(12) NOT NULL COMMENT '订单ID',
   `order_time` datetime NOT NULL COMMENT '下单时间',
-  `state` varchar(8) NOT NULL COMMENT '订单状态（not_used、used、expire）',
+  `total_count` int NOT NULL COMMENT '总次数',
+  `day_count` int NOT NULL COMMENT '日次数',
+  `month_count` int NOT NULL COMMENT '月次数',
+  `state` varchar(16) NOT NULL DEFAULT 'complete' COMMENT '订单状态（complete）',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传的，确保幂等',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
+  UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +164,6 @@ CREATE TABLE `raffle_activity_order_002` (
 
 LOCK TABLES `raffle_activity_order_002` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_002` DISABLE KEYS */;
-INSERT INTO `raffle_activity_order_002` VALUES (1,'RYtGKbgicZaHCBRQDSx',100301,'测试活动',10006,'982600973450','2025-10-30 16:14:00','not_used','2025-10-31 00:13:59','2025-10-31 00:13:59'),(2,'RYtGKbgicZaHCBRQDSx',100301,'测试活动',10006,'775524187774','2025-10-30 16:15:33','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(3,'dpHYZGhtgdntugzvvKAXLhM',100301,'测试活动',10006,'306789231175','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(4,'QvBQYuxiXXVytGCxzVllpgTJKhRQq',100301,'测试活动',10006,'936661107089','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(5,'yIvpRgmgQsYEKk',100301,'测试活动',10006,'489407786224','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(6,'PBzMiJFouxILNv',100301,'测试活动',10006,'975633317945','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(7,'HuubOREhRXJoDCVcLCRmll',100301,'测试活动',10006,'293669587532','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(8,'teOlrImKiDpJbLDnvK',100301,'测试活动',10006,'215308370684','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33');
 /*!40000 ALTER TABLE `raffle_activity_order_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,18 +177,24 @@ DROP TABLE IF EXISTS `raffle_activity_order_003`;
 CREATE TABLE `raffle_activity_order_003` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `user_id` varchar(32) NOT NULL COMMENT '用户ID',
+  `sku` bigint NOT NULL COMMENT '商品sku',
   `activity_id` bigint NOT NULL COMMENT '活动ID',
   `activity_name` varchar(64) NOT NULL COMMENT '活动名称',
   `strategy_id` bigint NOT NULL COMMENT '抽奖策略ID',
   `order_id` varchar(12) NOT NULL COMMENT '订单ID',
   `order_time` datetime NOT NULL COMMENT '下单时间',
-  `state` varchar(8) NOT NULL COMMENT '订单状态（not_used、used、expire）',
+  `total_count` int NOT NULL COMMENT '总次数',
+  `day_count` int NOT NULL COMMENT '日次数',
+  `month_count` int NOT NULL COMMENT '月次数',
+  `state` varchar(16) NOT NULL DEFAULT 'complete' COMMENT '订单状态（complete）',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传的，确保幂等',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
+  UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +203,6 @@ CREATE TABLE `raffle_activity_order_003` (
 
 LOCK TABLES `raffle_activity_order_003` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_003` DISABLE KEYS */;
-INSERT INTO `raffle_activity_order_003` VALUES (1,'JxkyvRnL',100301,'测试活动',10006,'452430913427','2025-10-30 16:14:00','not_used','2025-10-31 00:13:59','2025-10-31 00:13:59'),(2,'JxkyvRnL',100301,'测试活动',10006,'582848518367','2025-10-30 16:15:33','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(3,'UMaAIKKIkknjWEXJUfPxxQHeWKEJ',100301,'测试活动',10006,'655579767487','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(4,'LlN',100301,'测试活动',10006,'729783664687','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(5,'QIn',100301,'测试活动',10006,'881059694271','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(6,'pIoQM',100301,'测试活动',10006,'174999830787','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(7,'gEYzhlSTPkcSUyTSbBkU',100301,'测试活动',10006,'645649966631','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(8,'OV',100301,'测试活动',10006,'184260828761','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33'),(9,'O',100301,'测试活动',10006,'654168096006','2025-10-30 16:15:34','not_used','2025-10-31 00:15:33','2025-10-31 00:15:33');
 /*!40000 ALTER TABLE `raffle_activity_order_003` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -195,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-03 21:37:43
+-- Dump completed on 2025-11-06 20:54:04
