@@ -17,6 +17,7 @@
 
 CREATE database if NOT EXISTS `big_market` default character set utf8mb4;
 use `big_market`;
+
 --
 -- Table structure for table `award`
 --
@@ -139,7 +140,7 @@ CREATE TABLE `raffle_activity_sku` (
 
 LOCK TABLES `raffle_activity_sku` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_sku` DISABLE KEYS */;
-INSERT INTO `raffle_activity_sku` VALUES (1,9011,100301,11101,20,20,'2025-11-03 21:26:35','2025-11-06 20:20:27');
+INSERT INTO `raffle_activity_sku` VALUES (1,9011,100301,11101,20,1,'2025-11-03 21:26:35','2025-11-06 22:20:54');
 /*!40000 ALTER TABLE `raffle_activity_sku` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,4 +335,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-06 20:45:05
+-- Dump completed on 2025-11-09 14:51:22
