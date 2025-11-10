@@ -1,4 +1,4 @@
-package com.learn.domain.activity.service.rule;
+package com.learn.domain.activity.service.quota.rule;
 
 
 import com.learn.domain.activity.model.entity.ActivityCountEntity;

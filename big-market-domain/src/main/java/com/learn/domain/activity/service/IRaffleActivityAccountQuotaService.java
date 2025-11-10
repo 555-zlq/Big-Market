@@ -11,7 +11,7 @@ import com.learn.domain.activity.model.entity.SkuRechargeEntity;
  * @description TODO: 抽奖活动订单接口
  */
 
-public interface IRaffleOrder {
+public interface IRaffleActivityAccountQuotaService {
 
     /***
      * 以sku创建抽奖活动订单

@@ -1,11 +1,11 @@
-package com.learn.domain.activity.service.rule.impl;
+package com.learn.domain.activity.service.quota.rule.impl;
 
 
 import com.learn.domain.activity.model.entity.ActivityCountEntity;
 import com.learn.domain.activity.model.entity.ActivityEntity;
 import com.learn.domain.activity.model.entity.ActivitySkuEntity;
 import com.learn.domain.activity.model.valobj.ActivityStateVO;
-import com.learn.domain.activity.service.rule.AbstractActionChain;
+import com.learn.domain.activity.service.quota.rule.AbstractActionChain;
 import com.learn.types.enums.ResponseCode;
 import com.learn.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;

@@ -9,7 +9,7 @@ import com.learn.domain.activity.model.valobj.ActivitySkuStockKeyVO;
  * @description TODO: 活动sku库存处理接口
  */
 
-public interface ISkuStock {
+public interface IRaffleActivitySkuStockService {
 
     /**
      * 获取活动sku的消耗队列

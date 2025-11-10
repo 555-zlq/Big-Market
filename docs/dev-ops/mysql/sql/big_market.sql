@@ -17,7 +17,6 @@
 
 CREATE database if NOT EXISTS `big_market` default character set utf8mb4;
 use `big_market`;
-
 --
 -- Table structure for table `award`
 --
@@ -78,7 +77,7 @@ CREATE TABLE `raffle_activity` (
 
 LOCK TABLES `raffle_activity` WRITE;
 /*!40000 ALTER TABLE `raffle_activity` DISABLE KEYS */;
-INSERT INTO `raffle_activity` VALUES (2,100301,'测试活动','测试活动','2025-11-03 21:25:12','2025-11-08 21:25:15',10006,'open','2025-11-06 20:35:36','2025-11-06 20:35:36');
+INSERT INTO `raffle_activity` VALUES (2,100301,'测试活动','测试活动','2025-11-03 21:25:12','2025-11-11 21:25:15',10006,'open','2025-11-10 23:45:26','2025-11-10 23:45:26');
 /*!40000 ALTER TABLE `raffle_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,4 +334,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-09 14:51:22
+-- Dump completed on 2025-11-10 23:46:28
