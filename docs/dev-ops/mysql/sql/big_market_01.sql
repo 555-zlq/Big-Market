@@ -47,7 +47,7 @@ CREATE TABLE `raffle_activity_account` (
 
 LOCK TABLES `raffle_activity_account` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account` DISABLE KEYS */;
-INSERT INTO `raffle_activity_account` VALUES (1,'xiaofuge',100301,18,18,18,18,18,18,'2025-11-06 20:55:34','2025-11-06 20:55:34'),(2,'carton',100301,38,38,38,38,38,38,'2025-11-06 22:15:48','2025-11-06 22:19:19');
+INSERT INTO `raffle_activity_account` VALUES (1,'xiaofuge',100301,37,37,37,37,37,37,'2025-11-06 20:55:34','2025-11-11 00:02:43'),(2,'carton',100301,38,35,38,35,38,35,'2025-11-06 22:15:48','2025-11-11 10:25:47');
 /*!40000 ALTER TABLE `raffle_activity_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `raffle_activity_account_day` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_user_id_activity_id_day` (`user_id`,`activity_id`,`day`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-日次数';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-日次数';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +78,7 @@ CREATE TABLE `raffle_activity_account_day` (
 
 LOCK TABLES `raffle_activity_account_day` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account_day` DISABLE KEYS */;
+INSERT INTO `raffle_activity_account_day` VALUES (1,'carton',100301,'2025-11-10',38,36,'2025-11-10 23:54:41','2025-11-10 23:59:54'),(2,'carton',100301,'2025-11-11',38,35,'2025-11-11 10:25:47','2025-11-11 10:25:47');
 /*!40000 ALTER TABLE `raffle_activity_account_day` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +100,7 @@ CREATE TABLE `raffle_activity_account_month` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_user_id_activity_id_month` (`user_id`,`activity_id`,`month`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-月次数';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-月次数';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,6 +109,7 @@ CREATE TABLE `raffle_activity_account_month` (
 
 LOCK TABLES `raffle_activity_account_month` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account_month` DISABLE KEYS */;
+INSERT INTO `raffle_activity_account_month` VALUES (1,'carton',100301,'2025-11',38,35,'2025-11-10 23:54:41','2025-11-11 10:25:47');
 /*!40000 ALTER TABLE `raffle_activity_account_month` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +179,7 @@ CREATE TABLE `raffle_activity_order_001` (
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +188,7 @@ CREATE TABLE `raffle_activity_order_001` (
 
 LOCK TABLES `raffle_activity_order_001` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_001` DISABLE KEYS */;
-INSERT INTO `raffle_activity_order_001` VALUES (1,'xiaofuge',9011,100301,'测试活动',10006,'648689973538','2025-11-06 12:55:34',1,1,1,'completed','501842504011','2025-11-06 20:55:34','2025-11-06 20:55:34'),(2,'xiaofuge',9011,100301,'测试活动',10006,'999388621912','2025-11-06 12:55:34',1,1,1,'completed','250858847204','2025-11-06 20:55:34','2025-11-06 20:55:34'),(3,'xiaofuge',9011,100301,'测试活动',10006,'847230189249','2025-11-06 12:55:34',1,1,1,'completed','859841858287','2025-11-06 20:55:34','2025-11-06 20:55:34'),(4,'xiaofuge',9011,100301,'测试活动',10006,'123225792049','2025-11-06 12:55:34',1,1,1,'completed','880659571535','2025-11-06 20:55:34','2025-11-06 20:55:34'),(5,'xiaofuge',9011,100301,'测试活动',10006,'473553648404','2025-11-06 12:55:34',1,1,1,'completed','545884435029','2025-11-06 20:55:34','2025-11-06 20:55:34'),(6,'xiaofuge',9011,100301,'测试活动',10006,'705176391106','2025-11-06 12:55:34',1,1,1,'completed','491805303301','2025-11-06 20:55:34','2025-11-06 20:55:34'),(7,'xiaofuge',9011,100301,'测试活动',10006,'462590728448','2025-11-06 12:55:34',1,1,1,'completed','938713520927','2025-11-06 20:55:34','2025-11-06 20:55:34'),(8,'xiaofuge',9011,100301,'测试活动',10006,'194287641422','2025-11-06 12:55:34',1,1,1,'completed','416040853587','2025-11-06 20:55:34','2025-11-06 20:55:34'),(9,'xiaofuge',9011,100301,'测试活动',10006,'717708933224','2025-11-06 12:55:34',1,1,1,'completed','375642902559','2025-11-06 20:55:34','2025-11-06 20:55:34'),(10,'xiaofuge',9011,100301,'测试活动',10006,'845165763460','2025-11-06 12:55:34',1,1,1,'completed','173992619925','2025-11-06 20:55:34','2025-11-06 20:55:34'),(11,'xiaofuge',9011,100301,'测试活动',10006,'716647385977','2025-11-06 12:55:34',1,1,1,'completed','250654366523','2025-11-06 20:55:34','2025-11-06 20:55:34'),(12,'xiaofuge',9011,100301,'测试活动',10006,'705080605759','2025-11-06 12:55:34',1,1,1,'completed','081327774109','2025-11-06 20:55:34','2025-11-06 20:55:34'),(13,'xiaofuge',9011,100301,'测试活动',10006,'960509649607','2025-11-06 12:55:34',1,1,1,'completed','590406418140','2025-11-06 20:55:34','2025-11-06 20:55:34'),(14,'xiaofuge',9011,100301,'测试活动',10006,'135167435476','2025-11-06 12:55:34',1,1,1,'completed','104800515896','2025-11-06 20:55:34','2025-11-06 20:55:34'),(15,'xiaofuge',9011,100301,'测试活动',10006,'884589110601','2025-11-06 12:55:34',1,1,1,'completed','628626772035','2025-11-06 20:55:34','2025-11-06 20:55:34'),(16,'xiaofuge',9011,100301,'测试活动',10006,'920479344163','2025-11-06 12:55:34',1,1,1,'completed','658949063561','2025-11-06 20:55:34','2025-11-06 20:55:34'),(17,'xiaofuge',9011,100301,'测试活动',10006,'961284249569','2025-11-06 12:55:34',1,1,1,'completed','844293134204','2025-11-06 20:55:34','2025-11-06 20:55:34'),(18,'xiaofuge',9011,100301,'测试活动',10006,'033330548724','2025-11-06 12:55:34',1,1,1,'completed','042515819729','2025-11-06 20:55:34','2025-11-06 20:55:34');
+INSERT INTO `raffle_activity_order_001` VALUES (1,'xiaofuge',9011,100301,'测试活动',10006,'648689973538','2025-11-06 12:55:34',1,1,1,'completed','501842504011','2025-11-06 20:55:34','2025-11-06 20:55:34'),(2,'xiaofuge',9011,100301,'测试活动',10006,'999388621912','2025-11-06 12:55:34',1,1,1,'completed','250858847204','2025-11-06 20:55:34','2025-11-06 20:55:34'),(3,'xiaofuge',9011,100301,'测试活动',10006,'847230189249','2025-11-06 12:55:34',1,1,1,'completed','859841858287','2025-11-06 20:55:34','2025-11-06 20:55:34'),(4,'xiaofuge',9011,100301,'测试活动',10006,'123225792049','2025-11-06 12:55:34',1,1,1,'completed','880659571535','2025-11-06 20:55:34','2025-11-06 20:55:34'),(5,'xiaofuge',9011,100301,'测试活动',10006,'473553648404','2025-11-06 12:55:34',1,1,1,'completed','545884435029','2025-11-06 20:55:34','2025-11-06 20:55:34'),(6,'xiaofuge',9011,100301,'测试活动',10006,'705176391106','2025-11-06 12:55:34',1,1,1,'completed','491805303301','2025-11-06 20:55:34','2025-11-06 20:55:34'),(7,'xiaofuge',9011,100301,'测试活动',10006,'462590728448','2025-11-06 12:55:34',1,1,1,'completed','938713520927','2025-11-06 20:55:34','2025-11-06 20:55:34'),(8,'xiaofuge',9011,100301,'测试活动',10006,'194287641422','2025-11-06 12:55:34',1,1,1,'completed','416040853587','2025-11-06 20:55:34','2025-11-06 20:55:34'),(9,'xiaofuge',9011,100301,'测试活动',10006,'717708933224','2025-11-06 12:55:34',1,1,1,'completed','375642902559','2025-11-06 20:55:34','2025-11-06 20:55:34'),(10,'xiaofuge',9011,100301,'测试活动',10006,'845165763460','2025-11-06 12:55:34',1,1,1,'completed','173992619925','2025-11-06 20:55:34','2025-11-06 20:55:34'),(11,'xiaofuge',9011,100301,'测试活动',10006,'716647385977','2025-11-06 12:55:34',1,1,1,'completed','250654366523','2025-11-06 20:55:34','2025-11-06 20:55:34'),(12,'xiaofuge',9011,100301,'测试活动',10006,'705080605759','2025-11-06 12:55:34',1,1,1,'completed','081327774109','2025-11-06 20:55:34','2025-11-06 20:55:34'),(13,'xiaofuge',9011,100301,'测试活动',10006,'960509649607','2025-11-06 12:55:34',1,1,1,'completed','590406418140','2025-11-06 20:55:34','2025-11-06 20:55:34'),(14,'xiaofuge',9011,100301,'测试活动',10006,'135167435476','2025-11-06 12:55:34',1,1,1,'completed','104800515896','2025-11-06 20:55:34','2025-11-06 20:55:34'),(15,'xiaofuge',9011,100301,'测试活动',10006,'884589110601','2025-11-06 12:55:34',1,1,1,'completed','628626772035','2025-11-06 20:55:34','2025-11-06 20:55:34'),(16,'xiaofuge',9011,100301,'测试活动',10006,'920479344163','2025-11-06 12:55:34',1,1,1,'completed','658949063561','2025-11-06 20:55:34','2025-11-06 20:55:34'),(17,'xiaofuge',9011,100301,'测试活动',10006,'961284249569','2025-11-06 12:55:34',1,1,1,'completed','844293134204','2025-11-06 20:55:34','2025-11-06 20:55:34'),(18,'xiaofuge',9011,100301,'测试活动',10006,'033330548724','2025-11-06 12:55:34',1,1,1,'completed','042515819729','2025-11-06 20:55:34','2025-11-06 20:55:34'),(19,'xiaofuge',9011,100301,'测试活动',10006,'168974943318','2025-11-10 16:02:43',1,1,1,'completed','886999370818','2025-11-11 00:02:42','2025-11-11 00:02:42'),(20,'xiaofuge',9011,100301,'测试活动',10006,'651080399424','2025-11-10 16:02:43',1,1,1,'completed','608993065792','2025-11-11 00:02:42','2025-11-11 00:02:42'),(21,'xiaofuge',9011,100301,'测试活动',10006,'068550860519','2025-11-10 16:02:43',1,1,1,'completed','155086176350','2025-11-11 00:02:42','2025-11-11 00:02:42'),(22,'xiaofuge',9011,100301,'测试活动',10006,'343378098460','2025-11-10 16:02:43',1,1,1,'completed','436879313038','2025-11-11 00:02:42','2025-11-11 00:02:42'),(23,'xiaofuge',9011,100301,'测试活动',10006,'033113530904','2025-11-10 16:02:43',1,1,1,'completed','929478068080','2025-11-11 00:02:42','2025-11-11 00:02:42'),(24,'xiaofuge',9011,100301,'测试活动',10006,'140307801303','2025-11-10 16:02:43',1,1,1,'completed','078290391777','2025-11-11 00:02:42','2025-11-11 00:02:42'),(25,'xiaofuge',9011,100301,'测试活动',10006,'351997585764','2025-11-10 16:02:43',1,1,1,'completed','293228575571','2025-11-11 00:02:43','2025-11-11 00:02:43'),(26,'xiaofuge',9011,100301,'测试活动',10006,'424227685538','2025-11-10 16:02:43',1,1,1,'completed','376691167743','2025-11-11 00:02:43','2025-11-11 00:02:43'),(27,'xiaofuge',9011,100301,'测试活动',10006,'065952434525','2025-11-10 16:02:43',1,1,1,'completed','815983700748','2025-11-11 00:02:43','2025-11-11 00:02:43'),(28,'xiaofuge',9011,100301,'测试活动',10006,'099938644606','2025-11-10 16:02:43',1,1,1,'completed','949200699366','2025-11-11 00:02:43','2025-11-11 00:02:43'),(29,'xiaofuge',9011,100301,'测试活动',10006,'027899476161','2025-11-10 16:02:43',1,1,1,'completed','570869933642','2025-11-11 00:02:43','2025-11-11 00:02:43'),(30,'xiaofuge',9011,100301,'测试活动',10006,'728017150847','2025-11-10 16:02:43',1,1,1,'completed','370780218942','2025-11-11 00:02:43','2025-11-11 00:02:43'),(31,'xiaofuge',9011,100301,'测试活动',10006,'266826856940','2025-11-10 16:02:43',1,1,1,'completed','904353558826','2025-11-11 00:02:43','2025-11-11 00:02:43'),(32,'xiaofuge',9011,100301,'测试活动',10006,'522068914117','2025-11-10 16:02:43',1,1,1,'completed','459199911750','2025-11-11 00:02:43','2025-11-11 00:02:43'),(33,'xiaofuge',9011,100301,'测试活动',10006,'834179303796','2025-11-10 16:02:43',1,1,1,'completed','062128250887','2025-11-11 00:02:43','2025-11-11 00:02:43'),(34,'xiaofuge',9011,100301,'测试活动',10006,'121773966767','2025-11-10 16:02:43',1,1,1,'completed','590442404820','2025-11-11 00:02:43','2025-11-11 00:02:43'),(35,'xiaofuge',9011,100301,'测试活动',10006,'450712672834','2025-11-10 16:02:43',1,1,1,'completed','456094821836','2025-11-11 00:02:43','2025-11-11 00:02:43'),(36,'xiaofuge',9011,100301,'测试活动',10006,'442306022474','2025-11-10 16:02:43',1,1,1,'completed','748382710011','2025-11-11 00:02:43','2025-11-11 00:02:43'),(37,'xiaofuge',9011,100301,'测试活动',10006,'242130765783','2025-11-10 16:02:43',1,1,1,'completed','896521842993','2025-11-11 00:02:43','2025-11-11 00:02:43');
 /*!40000 ALTER TABLE `raffle_activity_order_001` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,13 +280,18 @@ DROP TABLE IF EXISTS `task`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `task` (
   `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `user_id` varchar(32) NOT NULL COMMENT '用户ID',
   `topic` varchar(32) NOT NULL COMMENT '消息主题',
+  `message_id` varchar(11) DEFAULT NULL COMMENT '消息编号',
   `message` varchar(512) NOT NULL COMMENT '消息主体',
   `state` varchar(16) NOT NULL DEFAULT 'create' COMMENT '任务状态；create-创建、completed-完成、fail-失败',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务表，发送MQ';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_message_id` (`message_id`),
+  KEY `idx_state` (`state`),
+  KEY `idx_create_time` (`update_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务表，发送MQ';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,6 +300,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
+INSERT INTO `task` VALUES (179,'carton','send_award','56396776155','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"56396776155\",\"timestamp\":1762949273098}','completed','2025-11-12 20:07:52','2025-11-12 20:07:53'),(180,'carton','send_award','88818515693','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"88818515693\",\"timestamp\":1762949274466}','completed','2025-11-12 20:07:53','2025-11-12 20:07:53'),(181,'carton','send_award','21651513306','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"21651513306\",\"timestamp\":1762949274996}','completed','2025-11-12 20:07:54','2025-11-12 20:07:54'),(182,'carton','send_award','24041612080','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"24041612080\",\"timestamp\":1762949275533}','completed','2025-11-12 20:07:54','2025-11-12 20:07:54'),(183,'carton','send_award','91074254039','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"91074254039\",\"timestamp\":1762949276063}','completed','2025-11-12 20:07:55','2025-11-12 20:07:55'),(184,'carton','send_award','93571306148','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"93571306148\",\"timestamp\":1762949276592}','completed','2025-11-12 20:07:55','2025-11-12 20:07:55'),(185,'carton','send_award','88228829509','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"88228829509\",\"timestamp\":1762949277119}','completed','2025-11-12 20:07:56','2025-11-12 20:07:56'),(186,'carton','send_award','14039250220','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"14039250220\",\"timestamp\":1762949277661}','completed','2025-11-12 20:07:57','2025-11-12 20:07:57'),(187,'carton','send_award','22226771693','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"22226771693\",\"timestamp\":1762949278192}','completed','2025-11-12 20:07:57','2025-11-12 20:07:57'),(188,'carton','send_award','91545054243','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"91545054243\",\"timestamp\":1762949278718}','completed','2025-11-12 20:07:58','2025-11-12 20:07:58'),(189,'carton','send_award','15291818997','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"15291818997\",\"timestamp\":1762949279245}','completed','2025-11-12 20:07:58','2025-11-12 20:07:58'),(190,'carton','send_award','31783168894','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"31783168894\",\"timestamp\":1762949279766}','completed','2025-11-12 20:07:59','2025-11-12 20:07:59'),(191,'carton','send_award','01218063933','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"01218063933\",\"timestamp\":1762949280299}','completed','2025-11-12 20:07:59','2025-11-12 20:07:59'),(192,'carton','send_award','37757482093','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"37757482093\",\"timestamp\":1762949280856}','completed','2025-11-12 20:08:00','2025-11-12 20:08:00'),(193,'carton','send_award','83150753527','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"83150753527\",\"timestamp\":1762949281384}','completed','2025-11-12 20:08:01','2025-11-12 20:08:01'),(194,'carton','send_award','19978372296','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"19978372296\",\"timestamp\":1762949281928}','completed','2025-11-12 20:08:01','2025-11-12 20:08:01'),(195,'carton','send_award','29378949726','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"29378949726\",\"timestamp\":1762949282469}','completed','2025-11-12 20:08:02','2025-11-12 20:08:02'),(196,'carton','send_award','44151591503','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"44151591503\",\"timestamp\":1762949282998}','completed','2025-11-12 20:08:02','2025-11-12 20:09:24'),(197,'carton','send_award','61085532983','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"61085532983\",\"timestamp\":1762949283528}','completed','2025-11-12 20:08:03','2025-11-12 20:09:24'),(198,'carton','send_award','48456002142','{\"data\":{\"awardId\":101,\"awardTitle\":\"OpenAI 增加使用次数\",\"userId\":\"carton\"},\"id\":\"48456002142\",\"timestamp\":1762949284057}','completed','2025-11-12 20:08:04','2025-11-12 20:09:24');
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +436,7 @@ CREATE TABLE `user_award_record_003` (
   KEY `idx_user_id` (`user_id`),
   KEY `idx_activity_id` (`activity_id`),
   KEY `idx_award_id` (`strategy_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户中奖记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户中奖记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,7 +568,7 @@ CREATE TABLE `user_raffle_order_003` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户抽奖订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户抽奖订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -569,6 +577,7 @@ CREATE TABLE `user_raffle_order_003` (
 
 LOCK TABLES `user_raffle_order_003` WRITE;
 /*!40000 ALTER TABLE `user_raffle_order_003` DISABLE KEYS */;
+INSERT INTO `user_raffle_order_003` VALUES (1,'carton',100301,'测试活动',10006,'906787871338','2025-11-10 15:54:41','used','2025-11-10 23:54:41','2025-11-10 23:59:38'),(2,'carton',100301,'测试活动',10006,'745975862815','2025-11-10 15:59:54','used','2025-11-10 23:59:54','2025-11-11 10:21:41'),(3,'carton',100301,'测试活动',10006,'583109062345','2025-11-11 02:22:11','create','2025-11-11 10:25:47','2025-11-11 10:25:47');
 /*!40000 ALTER TABLE `user_raffle_order_003` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -581,4 +590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-10 23:46:38
+-- Dump completed on 2025-11-12 20:10:34
