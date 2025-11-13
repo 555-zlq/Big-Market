@@ -3,6 +3,8 @@ package com.learn.infrastructure.persistent.dao;
 import com.learn.infrastructure.persistent.po.RaffleActivitySku;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * (RaffleActivitySku)表数据库访问层
  *
@@ -17,5 +19,7 @@ public interface IRaffleActivitySkuDao {
     void updateActivitySkuStock(Long sku);
 
     void clearActivitySkuStock(Long sku);
+
+    List<RaffleActivitySku> queryActivitySkuListByActivityId(Long activityId);
 }
 

@@ -14,5 +14,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface IRaffleActivityDao {
 
     RaffleActivity queryRaffleActivityByActivityId(long l);
+
+    Long queryStrategyIdByActivityId(Long activityId);
+
+    Long queryActivityIdByStrategyId(Long strategyId);
 }
 

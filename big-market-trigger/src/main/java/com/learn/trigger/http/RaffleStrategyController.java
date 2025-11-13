@@ -2,11 +2,11 @@ package com.learn.trigger.http;
 
 
 import com.alibaba.fastjson.JSON;
-import com.learn.api.IRaffleService;
+import com.learn.api.IRaffleStrategyService;
 import com.learn.api.dto.RaffleAwardListRequestDTO;
 import com.learn.api.dto.RaffleAwardListResponseDTO;
-import com.learn.api.dto.RaffleRequestDTO;
-import com.learn.api.dto.RaffleResponseDTO;
+import com.learn.api.dto.RaffleStrategyRequestDTO;
+import com.learn.api.dto.RaffleStrategyResponseDTO;
 import com.learn.api.response.Response;
 import com.learn.domain.strategy.model.entity.RaffleAwardEntity;
 import com.learn.domain.strategy.model.entity.RaffleFactoryEntity;
@@ -31,8 +31,8 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin("${app.config.cross-origin}")
-@RequestMapping("/api/${app.config.api-version}/raffle/")
-public class RaffleController implements IRaffleService {
+@RequestMapping("/api/${app.config.api-version}/raffle/strategy/")
+public class RaffleStrategyController implements IRaffleStrategyService {
 
     @Resource
     IStrategyArmory strategyArmory;
@@ -123,7 +123,7 @@ public class RaffleController implements IRaffleService {
      */
     @RequestMapping(value = "random_raffle", method = RequestMethod.POST)
     @Override
-    public Response<RaffleResponseDTO> randomRaffle(@RequestBody RaffleRequestDTO raffleRequest) {
+    public Response<RaffleStrategyResponseDTO> randomRaffle(@RequestBody RaffleStrategyRequestDTO raffleRequest) {
         try {
             log.info("随机抽奖开始 strategyId: {}", raffleRequest.getStrategyId());
             // 调用抽奖接口
@@ -131,10 +131,10 @@ public class RaffleController implements IRaffleService {
                     .userId("system")
                     .strategyId(raffleRequest.getStrategyId())
                     .build());
-            Response<RaffleResponseDTO> response = Response.<RaffleResponseDTO>builder()
+            Response<RaffleStrategyResponseDTO> response = Response.<RaffleStrategyResponseDTO>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
-                    .data(RaffleResponseDTO.builder()
+                    .data(RaffleStrategyResponseDTO.builder()
                             .awardId(Math.toIntExact(raffleAwardEntity.getAwardId()))
                             .awardIndex(raffleAwardEntity.getSort())
                             .build())
@@ -144,7 +144,7 @@ public class RaffleController implements IRaffleService {
 
         } catch (Exception e) {
             log.error("随机抽奖失败 strategyId：{}", raffleRequest.getStrategyId(), e);
-            return Response.<RaffleResponseDTO>builder()
+            return Response.<RaffleStrategyResponseDTO>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();

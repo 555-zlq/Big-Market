@@ -10,4 +10,6 @@ package com.learn.domain.activity.service.armory;
 public interface IActivityArmory {
 
     boolean assembleActivitySku(Long sku);
+
+    void assembleActivitySkuByActivityId(Long activityId);
 }

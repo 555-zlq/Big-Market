@@ -3,8 +3,8 @@ package com.learn.api;
 
 import com.learn.api.dto.RaffleAwardListRequestDTO;
 import com.learn.api.dto.RaffleAwardListResponseDTO;
-import com.learn.api.dto.RaffleRequestDTO;
-import com.learn.api.dto.RaffleResponseDTO;
+import com.learn.api.dto.RaffleStrategyRequestDTO;
+import com.learn.api.dto.RaffleStrategyResponseDTO;
 import com.learn.api.response.Response;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * @description TODO: 抽奖服务的接口
  */
 
-public interface IRaffleService {
+public interface IRaffleStrategyService {
 
     /**
      * 策略装配接口
@@ -39,5 +39,5 @@ public interface IRaffleService {
      * @param raffleRequest 随机抽奖请求
      * @return 随机抽奖响应
      */
-    Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO raffleRequest);
+    Response<RaffleStrategyResponseDTO> randomRaffle(RaffleStrategyRequestDTO raffleRequest);
 }
