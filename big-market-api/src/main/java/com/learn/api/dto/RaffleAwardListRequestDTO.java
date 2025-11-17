@@ -13,5 +13,10 @@ import lombok.Data;
 public class RaffleAwardListRequestDTO {
 
     // 抽奖策略id
+    @Deprecated
     private Long strategyId;
+
+    private String userId;
+
+    private Long activityId;
 }

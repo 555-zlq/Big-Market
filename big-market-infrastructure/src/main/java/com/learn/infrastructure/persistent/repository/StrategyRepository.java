@@ -18,10 +18,7 @@ import org.redisson.api.RDelayedQueue;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -79,6 +76,7 @@ public class StrategyRepository implements IStrategyRepository {
                         .awardCount(strategyAward.getAwardCount())
                         .awardCountSurplus(strategyAward.getAwardCountSurplus())
                         .sort((strategyAward.getSort()))
+                        .ruleModels(strategyAward.getRuleModels())
                         .build();
             strategyAwardEntities.add(strategyAwardEntity);
         }
@@ -323,5 +321,18 @@ public class StrategyRepository implements IStrategyRepository {
         // 总次数 - 剩余的，等于今日参与的
         return raffleActivityAccountDay.getDayCount() - raffleActivityAccountDay.getDayCountSurplus();
 
+    }
+
+    @Override
+    public Map<String, Integer> queryAwardRuleLockCount(String[] treeIds) {
+       if (null == treeIds || treeIds.length == 0) return new HashMap<>();
+       List<RuleTreeNode> ruleTreeNodes = ruleTreeNodeDao.queryRuleLocks(treeIds);
+       Map<String, Integer> resultMap = new HashMap<>();
+       for (RuleTreeNode node : ruleTreeNodes) {
+           String treeId = node.getTreeId();
+           Integer ruleValue = Integer.valueOf(node.getRuleValue());
+           resultMap.put(treeId, ruleValue);
+       }
+       return resultMap;
     }
 }

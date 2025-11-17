@@ -36,4 +36,6 @@ public class StrategyAwardEntity {
     private Integer awardCountSurplus;
     /** 抽奖奖品排序 */
     private Integer sort;
+    /** 策略奖励规则 */
+    private String ruleModels;
 }
