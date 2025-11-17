@@ -1,8 +1,9 @@
 package com.learn.domain.strategy.service.rule.tree.factory.engine;
 
 
-import com.learn.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import com.learn.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
+
+import java.util.Date;
 
 /**
  * @author Carton
@@ -11,5 +12,5 @@ import com.learn.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
  */
 
 public interface IDecisionTreeEngine {
-    DefaultTreeFactory.StrategyAwardVO process (String userId, Long strategyId, Long awardId);
+    DefaultTreeFactory.StrategyAwardVO process (String userId, Long strategyId, Long awardId, Date endDateTime);
 }

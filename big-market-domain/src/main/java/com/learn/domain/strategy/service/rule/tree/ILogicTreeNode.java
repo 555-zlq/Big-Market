@@ -3,6 +3,8 @@ package com.learn.domain.strategy.service.rule.tree;
 
 import com.learn.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
+import java.util.Date;
+
 /**
  * @author Carton
  * @date 2025/10/15 11:24
@@ -11,6 +13,6 @@ import com.learn.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
 public interface ILogicTreeNode {
 
-    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Long awardId, String ruleValue);
+    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Long awardId, String ruleValue, Date endDateTime);
 
 }

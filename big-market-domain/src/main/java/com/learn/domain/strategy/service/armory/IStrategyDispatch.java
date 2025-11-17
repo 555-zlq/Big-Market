@@ -1,6 +1,8 @@
 package com.learn.domain.strategy.service.armory;
 
 
+import java.util.Date;
+
 /**
  * @author Carton
  * @date 2025/10/9 10:38
@@ -26,6 +28,6 @@ public interface IStrategyDispatch {
      */
     Integer getRandomAwardId(Long strategyId, String ruleWeightValue);
 
-    Boolean subtractionAwardStock(Long strategyId, Long awardId);
+    Boolean subtractionAwardStock(Long strategyId, Long awardId, Date endDateTime);
 
 }
