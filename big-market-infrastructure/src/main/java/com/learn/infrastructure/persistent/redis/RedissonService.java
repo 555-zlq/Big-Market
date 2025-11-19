@@ -1,6 +1,7 @@
 package com.learn.infrastructure.persistent.redis;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @description TODO: Redis服务的实现类
  */
 
+@Slf4j
 @Service("redissonService")
 public class RedissonService implements IRedisService{
 
@@ -178,7 +180,15 @@ public class RedissonService implements IRedisService{
 
     @Override
     public Boolean setNx(String lockKey, long expireMills, TimeUnit timeUnit) {
-        return redissonClient.getBucket(lockKey).trySet("lock", expireMills, timeUnit);
+        try {
+            RLock lock = redissonClient.getLock(lockKey);
+            // 0 表示不等待，expireMills 是锁自动释放时间
+            return lock.tryLock(0, expireMills, timeUnit);
+        } catch (Exception e) {
+            log.error("获取分布式锁失败", e);
+            return false;
+        }
     }
+
 
 }

@@ -72,7 +72,7 @@ public class RaffleActivityPartakeService extends AbstractRaffleActivityPartake{
             activityAccountMonthEntity.setActivityId(activityId);
             activityAccountMonthEntity.setMonth(month);
             activityAccountMonthEntity.setMonthCount(activityAccount.getMonthCount());
-            activityAccountMonthEntity.setMonthCountSurplus(activityAccount.getMonthCountSurplus());
+            activityAccountMonthEntity.setMonthCountSurplus(activityAccount.getMonthCount());
         }
 
         // 查询日账户额度
@@ -89,7 +89,7 @@ public class RaffleActivityPartakeService extends AbstractRaffleActivityPartake{
             activityAccountDayEntity.setActivityId(activityId);
             activityAccountDayEntity.setDay(day);
             activityAccountDayEntity.setDayCount(activityAccount.getDayCount());
-            activityAccountDayEntity.setDayCountSurplus(activityAccount.getDayCountSurplus());
+            activityAccountDayEntity.setDayCountSurplus(activityAccount.getDayCount());
         }
 
         // 构建对象
