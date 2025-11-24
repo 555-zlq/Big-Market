@@ -1,6 +1,9 @@
 package com.learn.domain.strategy.service;
 
 
+import com.learn.domain.strategy.model.valobj.RuleWeightVO;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,4 +21,10 @@ public interface IRaffleRule {
      * @return 规则树的加锁值
      */
     Map<String, Integer> queryAwardRuleLockCount(String[] treeIds);
+
+    List<RuleWeightVO> queryAwardRuleWeightByActivityId(Long activityId);
+
+    List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
+
+
 }

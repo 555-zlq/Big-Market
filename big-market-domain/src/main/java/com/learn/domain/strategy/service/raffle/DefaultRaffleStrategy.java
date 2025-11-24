@@ -3,6 +3,7 @@ package com.learn.domain.strategy.service.raffle;
 
 import com.learn.domain.strategy.model.entity.StrategyAwardEntity;
 import com.learn.domain.strategy.model.valobj.RuleTreeVO;
+import com.learn.domain.strategy.model.valobj.RuleWeightVO;
 import com.learn.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.learn.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import com.learn.domain.strategy.repository.IStrategyRepository;
@@ -18,6 +19,7 @@ import com.learn.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeE
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -87,5 +89,16 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
     @Override
     public Map<String, Integer> queryAwardRuleLockCount(String[] treeIds) {
         return repository.queryAwardRuleLockCount(treeIds);
+    }
+
+    @Override
+    public List<RuleWeightVO> queryAwardRuleWeightByActivityId(Long activityId) {
+        Long strategyId = repository.queryStrategyIdByActivityId(activityId);
+        return queryAwardRuleWeight(strategyId);
+    }
+
+    @Override
+    public List<RuleWeightVO> queryAwardRuleWeight(Long strategyId) {
+        return repository.queryAwardRuleWeight(strategyId);
     }
 }

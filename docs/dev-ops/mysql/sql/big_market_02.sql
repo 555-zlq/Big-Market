@@ -38,7 +38,7 @@ CREATE TABLE `raffle_activity_account` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_user_id_activity_id` (`user_id`,`activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +47,7 @@ CREATE TABLE `raffle_activity_account` (
 
 LOCK TABLES `raffle_activity_account` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account` DISABLE KEYS */;
+INSERT INTO `raffle_activity_account` VALUES (1,'yzp',100301,1,1,1,1,1,1,'2025-11-24 23:23:33','2025-11-24 23:23:33');
 /*!40000 ALTER TABLE `raffle_activity_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +216,7 @@ CREATE TABLE `raffle_activity_order_002` (
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,6 +225,7 @@ CREATE TABLE `raffle_activity_order_002` (
 
 LOCK TABLES `raffle_activity_order_002` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_002` DISABLE KEYS */;
+INSERT INTO `raffle_activity_order_002` VALUES (1,'yzp',9011,100301,'测试活动',10006,'612869321486','2025-11-24 15:23:33',1,1,1,'completed','yzp_sku_20251124','2025-11-24 23:23:27','2025-11-24 23:23:27');
 /*!40000 ALTER TABLE `raffle_activity_order_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +288,7 @@ CREATE TABLE `task` (
   UNIQUE KEY `uq_message_id` (`message_id`),
   KEY `idx_state` (`state`),
   KEY `idx_create_time` (`update_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务表，发送MQ';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务表，发送MQ';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,6 +297,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
+INSERT INTO `task` VALUES (1,'yzp','send_rebate','11510872307','BaseEvent.EventMessage(id=11510872307, timestamp=Mon Nov 24 23:23:32 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=sku, rebateConfig=9011, bizId=yzp_sku_20251124))','completed','2025-11-24 23:23:26','2025-11-24 23:23:26'),(2,'yzp','send_rebate','95820284693','BaseEvent.EventMessage(id=95820284693, timestamp=Mon Nov 24 23:23:32 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=integral, rebateConfig=10, bizId=yzp_integral_20251124))','completed','2025-11-24 23:23:26','2025-11-24 23:23:26');
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,14 +460,15 @@ CREATE TABLE `user_behavior_rebate_order_000` (
   `rebate_desc` varchar(128) NOT NULL COMMENT '返利描述',
   `rebate_type` varchar(16) NOT NULL COMMENT '返利类型（sku 活动库存充值商品、integral 用户活动积分）',
   `rebate_config` varchar(32) NOT NULL COMMENT '返利配置【sku值，积分值】',
-  `biz_id` varchar(64) NOT NULL COMMENT '业务ID - 拼接的唯一值',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传，方便查询使用',
+  `biz_id` varchar(128) NOT NULL COMMENT '业务ID - 拼接的唯一值。拼接 out_business_no + 自身枚举',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_biz_id` (`biz_id`),
   KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -473,6 +477,7 @@ CREATE TABLE `user_behavior_rebate_order_000` (
 
 LOCK TABLES `user_behavior_rebate_order_000` WRITE;
 /*!40000 ALTER TABLE `user_behavior_rebate_order_000` DISABLE KEYS */;
+INSERT INTO `user_behavior_rebate_order_000` VALUES (5,'xiaofuge1','883971522401','sign','签到返利-sku额度','sku','9011','20240503','xiaofuge1_sku_20240503','2024-05-03 16:01:42','2024-05-03 16:01:42'),(6,'xiaofuge1','995944930386','sign','签到返利-积分','integral','10','20240503','xiaofuge1_integral_20240503','2024-05-03 16:01:43','2024-05-03 16:01:43');
 /*!40000 ALTER TABLE `user_behavior_rebate_order_000` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,14 +496,15 @@ CREATE TABLE `user_behavior_rebate_order_001` (
   `rebate_desc` varchar(128) NOT NULL COMMENT '返利描述',
   `rebate_type` varchar(16) NOT NULL COMMENT '返利类型（sku 活动库存充值商品、integral 用户活动积分）',
   `rebate_config` varchar(32) NOT NULL COMMENT '返利配置【sku值，积分值】',
-  `biz_id` varchar(64) NOT NULL COMMENT '业务ID - 拼接的唯一值',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传，方便查询使用',
+  `biz_id` varchar(128) NOT NULL COMMENT '业务ID - 拼接的唯一值。拼接 out_business_no + 自身枚举',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_biz_id` (`biz_id`),
   KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -525,14 +531,15 @@ CREATE TABLE `user_behavior_rebate_order_002` (
   `rebate_desc` varchar(128) NOT NULL COMMENT '返利描述',
   `rebate_type` varchar(16) NOT NULL COMMENT '返利类型（sku 活动库存充值商品、integral 用户活动积分）',
   `rebate_config` varchar(32) NOT NULL COMMENT '返利配置【sku值，积分值】',
-  `biz_id` varchar(64) NOT NULL COMMENT '业务ID - 拼接的唯一值',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传，方便查询使用',
+  `biz_id` varchar(128) NOT NULL COMMENT '业务ID - 拼接的唯一值。拼接 out_business_no + 自身枚举',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_biz_id` (`biz_id`),
   KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -541,6 +548,7 @@ CREATE TABLE `user_behavior_rebate_order_002` (
 
 LOCK TABLES `user_behavior_rebate_order_002` WRITE;
 /*!40000 ALTER TABLE `user_behavior_rebate_order_002` DISABLE KEYS */;
+INSERT INTO `user_behavior_rebate_order_002` VALUES (1,'yzp','763857422476','sign','签到返利-sku额度','sku','9011','20251124','yzp_sku_20251124','2025-11-24 23:23:26','2025-11-24 23:23:26'),(2,'yzp','586517238366','sign','签到返利-积分','integral','10','20251124','yzp_integral_20251124','2025-11-24 23:23:26','2025-11-24 23:23:26');
 /*!40000 ALTER TABLE `user_behavior_rebate_order_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -559,7 +567,8 @@ CREATE TABLE `user_behavior_rebate_order_003` (
   `rebate_desc` varchar(128) NOT NULL COMMENT '返利描述',
   `rebate_type` varchar(16) NOT NULL COMMENT '返利类型（sku 活动库存充值商品、integral 用户活动积分）',
   `rebate_config` varchar(32) NOT NULL COMMENT '返利配置【sku值，积分值】',
-  `biz_id` varchar(64) NOT NULL COMMENT '业务ID - 拼接的唯一值',
+  `out_business_no` varchar(64) NOT NULL COMMENT '业务仿重ID - 外部透传，方便查询使用',
+  `biz_id` varchar(128) NOT NULL COMMENT '业务ID - 拼接的唯一值。拼接 out_business_no + 自身枚举',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -719,4 +728,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-20 22:34:53
+-- Dump completed on 2025-11-24 23:32:45

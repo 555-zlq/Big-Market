@@ -5,6 +5,7 @@ import com.learn.domain.strategy.model.entity.StrategyAwardEntity;
 import com.learn.domain.strategy.model.entity.StrategyEntity;
 import com.learn.domain.strategy.model.entity.StrategyRuleEntity;
 import com.learn.domain.strategy.model.valobj.RuleTreeVO;
+import com.learn.domain.strategy.model.valobj.RuleWeightVO;
 import com.learn.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import com.learn.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
@@ -85,4 +86,8 @@ public interface IStrategyRepository {
     Map<String, Integer> queryAwardRuleLockCount(String[] treeIds);
 
     Boolean subtractionAwardStock(String cacheKey, Date endDateTime);
+
+    Integer queryActivityAccountTotalUseCount(String userId, Long strategyId);
+
+    List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
 }
