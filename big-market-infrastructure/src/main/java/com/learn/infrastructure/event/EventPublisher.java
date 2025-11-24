@@ -1,7 +1,8 @@
 package com.learn.infrastructure.event;
 
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.learn.types.events.BaseEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,7 +24,7 @@ public class EventPublisher {
 
     public void publish(String topic, BaseEvent.EventMessage<?> eventMessage) {
         try {
-            String messageJson = JSON.toJSONString(eventMessage);
+            String messageJson = JSON.toJSONString(eventMessage, JSONWriter.Feature.WriteClassName);
             rabbitTemplate.convertAndSend(topic, messageJson);
             log.info("发送MQ消息 topic:{} message:{}", topic, messageJson);
         } catch (Exception e) {
