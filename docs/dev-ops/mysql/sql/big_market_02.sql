@@ -47,7 +47,7 @@ CREATE TABLE `raffle_activity_account` (
 
 LOCK TABLES `raffle_activity_account` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account` DISABLE KEYS */;
-INSERT INTO `raffle_activity_account` VALUES (1,'yzp',100301,1,1,1,1,1,1,'2025-11-24 23:23:33','2025-11-24 23:23:33');
+INSERT INTO `raffle_activity_account` VALUES (1,'yzp',100301,102,96,102,96,102,96,'2025-11-24 23:23:33','2025-11-25 15:02:00');
 /*!40000 ALTER TABLE `raffle_activity_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `raffle_activity_account_day` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_user_id_activity_id_day` (`user_id`,`activity_id`,`day`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-日次数';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-日次数';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +78,7 @@ CREATE TABLE `raffle_activity_account_day` (
 
 LOCK TABLES `raffle_activity_account_day` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account_day` DISABLE KEYS */;
+INSERT INTO `raffle_activity_account_day` VALUES (1,'yzp',100301,'2025-11-25',102,96,'2025-11-25 14:14:58','2025-11-25 15:02:00');
 /*!40000 ALTER TABLE `raffle_activity_account_day` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +100,7 @@ CREATE TABLE `raffle_activity_account_month` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_user_id_activity_id_month` (`user_id`,`activity_id`,`month`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-月次数';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动账户表-月次数';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,6 +109,7 @@ CREATE TABLE `raffle_activity_account_month` (
 
 LOCK TABLES `raffle_activity_account_month` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_account_month` DISABLE KEYS */;
+INSERT INTO `raffle_activity_account_month` VALUES (1,'yzp',100301,'2025-11',102,96,'2025-11-25 14:14:58','2025-11-25 15:02:00');
 /*!40000 ALTER TABLE `raffle_activity_account_month` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +218,7 @@ CREATE TABLE `raffle_activity_order_002` (
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_out_business_no` (`out_business_no`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`,`state`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='抽奖活动单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +227,7 @@ CREATE TABLE `raffle_activity_order_002` (
 
 LOCK TABLES `raffle_activity_order_002` WRITE;
 /*!40000 ALTER TABLE `raffle_activity_order_002` DISABLE KEYS */;
-INSERT INTO `raffle_activity_order_002` VALUES (1,'yzp',9011,100301,'测试活动',10006,'612869321486','2025-11-24 15:23:33',1,1,1,'completed','yzp_sku_20251124','2025-11-24 23:23:27','2025-11-24 23:23:27');
+INSERT INTO `raffle_activity_order_002` VALUES (1,'yzp',9011,100301,'测试活动',10006,'612869321486','2025-11-24 15:23:33',1,1,1,'completed','yzp_sku_20251124','2025-11-24 23:23:27','2025-11-24 23:23:27'),(4,'yzp',9011,100301,'测试活动',10006,'248535876632','2025-11-25 07:01:23',100,100,100,'completed','yzp_sku_20251125','2025-11-25 15:01:15','2025-11-25 15:01:15');
 /*!40000 ALTER TABLE `raffle_activity_order_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +290,7 @@ CREATE TABLE `task` (
   UNIQUE KEY `uq_message_id` (`message_id`),
   KEY `idx_state` (`state`),
   KEY `idx_create_time` (`update_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务表，发送MQ';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='任务表，发送MQ';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,7 +299,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'yzp','send_rebate','11510872307','BaseEvent.EventMessage(id=11510872307, timestamp=Mon Nov 24 23:23:32 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=sku, rebateConfig=9011, bizId=yzp_sku_20251124))','completed','2025-11-24 23:23:26','2025-11-24 23:23:26'),(2,'yzp','send_rebate','95820284693','BaseEvent.EventMessage(id=95820284693, timestamp=Mon Nov 24 23:23:32 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=integral, rebateConfig=10, bizId=yzp_integral_20251124))','completed','2025-11-24 23:23:26','2025-11-24 23:23:26');
+INSERT INTO `task` VALUES (1,'yzp','send_rebate','11510872307','BaseEvent.EventMessage(id=11510872307, timestamp=Mon Nov 24 23:23:32 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=sku, rebateConfig=9011, bizId=yzp_sku_20251124))','completed','2025-11-24 23:23:26','2025-11-24 23:23:26'),(2,'yzp','send_rebate','95820284693','BaseEvent.EventMessage(id=95820284693, timestamp=Mon Nov 24 23:23:32 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=integral, rebateConfig=10, bizId=yzp_integral_20251124))','completed','2025-11-24 23:23:26','2025-11-24 23:23:26'),(3,'yzp','send_rebate','61955381952','BaseEvent.EventMessage(id=61955381952, timestamp=Tue Nov 25 14:14:14 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=sku, rebateConfig=9011, bizId=yzp_sku_20251125))','completed','2025-11-25 14:14:07','2025-11-25 14:14:07'),(4,'yzp','send_rebate','51230730422','BaseEvent.EventMessage(id=51230730422, timestamp=Tue Nov 25 14:14:14 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=integral, rebateConfig=10, bizId=yzp_integral_20251125))','completed','2025-11-25 14:14:07','2025-11-25 14:14:07'),(5,'yzp','send_award','65183562123','{\"data\":{\"awardId\":103,\"awardTitle\":\"支付优惠卷\",\"userId\":\"yzp\"},\"id\":\"65183562123\",\"timestamp\":1764051305170}','completed','2025-11-25 14:14:58','2025-11-25 14:14:58'),(6,'yzp','send_award','83588018086','{\"data\":{\"awardId\":101,\"awardTitle\":\"随机积分\",\"userId\":\"yzp\"},\"id\":\"83588018086\",\"timestamp\":1764052612511}','completed','2025-11-25 14:36:45','2025-11-25 14:36:45'),(7,'yzp','send_rebate','36831161311','BaseEvent.EventMessage(id=36831161311, timestamp=Tue Nov 25 14:59:00 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=sku, rebateConfig=9011, bizId=yzp_sku_20251125))','completed','2025-11-25 14:59:00','2025-11-25 14:58:53'),(8,'yzp','send_rebate','57026235076','BaseEvent.EventMessage(id=57026235076, timestamp=Tue Nov 25 14:59:00 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=integral, rebateConfig=10, bizId=yzp_integral_20251125))','completed','2025-11-25 14:59:00','2025-11-25 14:58:53'),(9,'yzp','send_rebate','16868585210','BaseEvent.EventMessage(id=16868585210, timestamp=Tue Nov 25 15:01:22 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=sku, rebateConfig=9011, bizId=yzp_sku_20251125))','completed','2025-11-25 15:01:15','2025-11-25 15:01:15'),(10,'yzp','send_rebate','21624243932','BaseEvent.EventMessage(id=21624243932, timestamp=Tue Nov 25 15:01:22 CST 2025, data=SendRebateMessageEvent.RebateMessage(userId=yzp, rebateDesc=null, rebateType=integral, rebateConfig=10, bizId=yzp_integral_20251125))','completed','2025-11-25 15:01:15','2025-11-25 15:01:15'),(11,'yzp','send_award','60573614709','{\"data\":{\"awardId\":106,\"awardTitle\":\"轻奢办公椅\",\"userId\":\"yzp\"},\"id\":\"60573614709\",\"timestamp\":1764054094561}','completed','2025-11-25 15:01:27','2025-11-25 15:01:27'),(12,'yzp','send_award','96405125416','{\"data\":{\"awardId\":106,\"awardTitle\":\"轻奢办公椅\",\"userId\":\"yzp\"},\"id\":\"96405125416\",\"timestamp\":1764054106351}','completed','2025-11-25 15:01:39','2025-11-25 15:01:39'),(13,'yzp','send_award','06687107314','{\"data\":{\"awardId\":104,\"awardTitle\":\"小米台灯\",\"userId\":\"yzp\"},\"id\":\"06687107314\",\"timestamp\":1764054115403}','completed','2025-11-25 15:01:48','2025-11-25 15:01:48'),(14,'yzp','send_award','06180469861','{\"data\":{\"awardId\":102,\"awardTitle\":\"OpenAI会员卡\",\"userId\":\"yzp\"},\"id\":\"06180469861\",\"timestamp\":1764054127090}','completed','2025-11-25 15:02:00','2025-11-25 15:02:00');
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +399,7 @@ CREATE TABLE `user_award_record_002` (
   KEY `idx_user_id` (`user_id`),
   KEY `idx_activity_id` (`activity_id`),
   KEY `idx_award_id` (`strategy_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户中奖记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户中奖记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,6 +408,7 @@ CREATE TABLE `user_award_record_002` (
 
 LOCK TABLES `user_award_record_002` WRITE;
 /*!40000 ALTER TABLE `user_award_record_002` DISABLE KEYS */;
+INSERT INTO `user_award_record_002` VALUES (1,'yzp',100301,10006,'465792756346',103,'支付优惠卷','2025-11-25 06:15:05','create','2025-11-25 14:14:58','2025-11-25 14:14:58'),(2,'yzp',100301,10006,'592279834845',101,'随机积分','2025-11-25 06:36:53','create','2025-11-25 14:36:45','2025-11-25 14:36:45'),(3,'yzp',100301,10006,'373528579016',106,'轻奢办公椅','2025-11-25 07:01:35','create','2025-11-25 15:01:27','2025-11-25 15:01:27'),(4,'yzp',100301,10006,'684663770140',106,'轻奢办公椅','2025-11-25 07:01:46','create','2025-11-25 15:01:39','2025-11-25 15:01:39'),(5,'yzp',100301,10006,'196511187179',104,'小米台灯','2025-11-25 07:01:55','create','2025-11-25 15:01:48','2025-11-25 15:01:48'),(6,'yzp',100301,10006,'502856166342',102,'OpenAI会员卡','2025-11-25 07:02:07','create','2025-11-25 15:02:00','2025-11-25 15:02:00');
 /*!40000 ALTER TABLE `user_award_record_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,7 +542,7 @@ CREATE TABLE `user_behavior_rebate_order_002` (
   UNIQUE KEY `uq_order_id` (`order_id`),
   UNIQUE KEY `uq_biz_id` (`biz_id`),
   KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户行为返利流水订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,7 +551,7 @@ CREATE TABLE `user_behavior_rebate_order_002` (
 
 LOCK TABLES `user_behavior_rebate_order_002` WRITE;
 /*!40000 ALTER TABLE `user_behavior_rebate_order_002` DISABLE KEYS */;
-INSERT INTO `user_behavior_rebate_order_002` VALUES (1,'yzp','763857422476','sign','签到返利-sku额度','sku','9011','20251124','yzp_sku_20251124','2025-11-24 23:23:26','2025-11-24 23:23:26'),(2,'yzp','586517238366','sign','签到返利-积分','integral','10','20251124','yzp_integral_20251124','2025-11-24 23:23:26','2025-11-24 23:23:26');
+INSERT INTO `user_behavior_rebate_order_002` VALUES (1,'yzp','763857422476','sign','签到返利-sku额度','sku','9011','20251124','yzp_sku_20251124','2025-11-24 23:23:26','2025-11-24 23:23:26'),(2,'yzp','586517238366','sign','签到返利-积分','integral','10','20251124','yzp_integral_20251124','2025-11-24 23:23:26','2025-11-24 23:23:26'),(7,'yzp','455613403344','sign','签到返利-sku额度','sku','9011','20251125','yzp_sku_20251125','2025-11-25 15:01:15','2025-11-25 15:01:15'),(8,'yzp','043696328336','sign','签到返利-积分','integral','10','20251125','yzp_integral_20251125','2025-11-25 15:01:15','2025-11-25 15:01:15');
 /*!40000 ALTER TABLE `user_behavior_rebate_order_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -674,7 +677,7 @@ CREATE TABLE `user_raffle_order_002` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_order_id` (`order_id`),
   KEY `idx_user_id_activity_id` (`user_id`,`activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户抽奖订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户抽奖订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -683,6 +686,7 @@ CREATE TABLE `user_raffle_order_002` (
 
 LOCK TABLES `user_raffle_order_002` WRITE;
 /*!40000 ALTER TABLE `user_raffle_order_002` DISABLE KEYS */;
+INSERT INTO `user_raffle_order_002` VALUES (1,'yzp',100301,'测试活动',10006,'465792756346','2025-11-25 06:15:05','used','2025-11-25 14:14:58','2025-11-25 14:14:58'),(2,'yzp',100301,'测试活动',10006,'592279834845','2025-11-25 06:36:52','used','2025-11-25 14:36:45','2025-11-25 14:36:45'),(3,'yzp',100301,'测试活动',10006,'373528579016','2025-11-25 07:01:34','used','2025-11-25 15:01:27','2025-11-25 15:01:27'),(4,'yzp',100301,'测试活动',10006,'684663770140','2025-11-25 07:01:46','used','2025-11-25 15:01:39','2025-11-25 15:01:39'),(5,'yzp',100301,'测试活动',10006,'196511187179','2025-11-25 07:01:55','used','2025-11-25 15:01:48','2025-11-25 15:01:48'),(6,'yzp',100301,'测试活动',10006,'502856166342','2025-11-25 07:02:07','used','2025-11-25 15:02:00','2025-11-25 15:02:00');
 /*!40000 ALTER TABLE `user_raffle_order_002` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -728,4 +732,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-24 23:32:45
+-- Dump completed on 2025-11-25 21:02:26
